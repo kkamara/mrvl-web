@@ -18,6 +18,10 @@ Browse and manage your favourite Marvel Comics.
   cp .env.example .env
   yarn install
   yarn dev
+  # defaults:
+  #   server: http://localhost:3000
+  #   client: http://localhost:5000
+  # see ./package.json and client/package.json for change
 ```
 
 ## Contributing
