@@ -23,7 +23,7 @@ const App = () => (
                 <Header />
                 <Switch>
                     <Route path="/" exact component={HomePage} />
-                    <Route path="/search" exact component={SearchCharactersPage} />
+                    <Route path="/favs" exact component={SearchCharactersPage} />
                     <Route path="/characters/:id" exact component={CharacterPage} />
                     <Route path="/404" exact component={Page404} />
                     <Redirect to="/404" />

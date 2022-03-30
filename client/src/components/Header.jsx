@@ -13,6 +13,11 @@ const Header = () => (
                 onClick={() => { window.location.href = '/' }}
             />
         </div>
+        <nav className="container nav-container">
+            <a className="btn btn-warning btn-lg" href="/">Home</a>
+            <a className="btn btn-warning btn-lg" href="/favs">Favourites</a>
+            <a className="btn btn-warning btn-lg" href="/404">404 page</a>
+        </nav>
     </header>
 )
 
