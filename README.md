@@ -1,9 +1,21 @@
 # mrvl
 Browse and manage your favourite Marvel Comics.
 
+## Installation
+
+* [Node](https://nodejs.org/en/) 
+* [npm](https://www.npmjs.com/get-npm) 
+* [Yarn](https://www.yarnpkg.com)
+
+```bash
+  npm i -g yarn
+```
+
+
 ## Usage
 
 ```bash
+  cp .env.example .env
   yarn install
   yarn dev
 ```
