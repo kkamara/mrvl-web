@@ -1,6 +1,11 @@
 import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom"
 import React, { Fragment } from "react"
 
+import $ from'jquery'
+import Popper from'popper.js'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import '../node_modules/bootstrap/dist/js/bootstrap.bundle.min'
+
 import SearchCharactersPage from "./components/SearchCharacters/SearchCharactersPage"
 import CharacterPage from "./components/Character/CharacterPage"
 import HomePage from "./components/Characters/HomePage"
