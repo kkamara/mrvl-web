@@ -5,7 +5,8 @@
   "main": "src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/app.js"
+    "start": "node src/app.js",
+    "dev": "concurrently \"yarn start\" \"cd client && yarn start\""
   },
   "repository": {
     "type": "git",
@@ -29,5 +30,8 @@
     "express": "^4.17.1",
     "md5": "^2.3.0",
     "sanitize": "^2.1.0"
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0"
   }
 }
