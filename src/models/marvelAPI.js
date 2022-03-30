@@ -8,6 +8,8 @@ const {
 } = require('../config')
 
 class MarvelAPI extends API {
+    _headers = { Accept: 'application/json', }
+
     /**
      * Call base class construct.
      * @param {any=} http - Optional http to override default assignment
@@ -15,28 +17,6 @@ class MarvelAPI extends API {
      */
     constructor(http=null) {
         super(http)
-        const url = new URL(marvelURL + '/public/comics')
-        const urlParams = this.generateKeys()
-
-        for (let key in urlParams) {
-            const val = urlParams[key]
-            switch(key) {
-                case 'apiKey':
-                    key = 'apikey'
-                default:
-                    break
-            }
-            url.searchParams.append(key, val)
-        }
-        
-        axios.get(url.href, { headers: { Accept: 'application/json', },})
-            .then(res => {
-                console.log(res.data.data)
-            })
-            .catch(err => {
-                console.log(err)
-                throw err
-            })
     }
 
     /**
@@ -50,48 +30,23 @@ class MarvelAPI extends API {
 
     /**
      * Return a single character api response
-     * @param  {number} id
-     * @return {string|boolean}
+     * @return {Promise}
      */
-    getCharacter(id) {
-        /** @var {string} endpoint */
-        const endpoint = `${this._url}/character/${id}`
-        return axios.get(endpoint)
-    }
+    getComics() {
+        const endpoint = new URL(`${marvelURL}/public/comics`)
+        const urlParams = this.generateKeys()
 
-    /**
-     * Return characters api response     *
-     * @param  {number=} page (optional)
-     * @return string|boolean
-     */
-    getChars(page=null) {
-        page = null !== page && null !== `${page}`.match(/^\d+$/)
-            ? Number.parseInt(page)
-            : 1
-
-        /** @var {string} endpoint */
-        let endpoint = `${this._url}/character`
-        if (page) endpoint += `/?page=${page}`
-
-        return axios.get(endpoint)
-    }
-
-    /**
-     * Search through character results.
-     * @param  {string} uriEncodedFilters - Store filter values provided in request
-     * @param  {number=} page (optional)
-     * @return string|boolean
-     */
-    search(uriEncodedFilters, page) {
-        if (1 > uriEncodedFilters.length) return new Promise(resolve => resolve(false))
-
-        page = null !== page && null !== `${page}`.match(/^\d+$/)
-            ? Number.parseInt(page)
-            : 1
-
-        /** @var {string} endpoint */
-        const endpoint = `${this._url}/character/?page=${page}&${uriEncodedFilters}`
-        return axios.get(endpoint)
+        for (let key in urlParams) {
+            const val = urlParams[key]
+            switch(key) {
+                case 'apiKey':
+                    key = 'apikey'
+                default:
+                    break
+            }
+            endpoint.searchParams.append(key, val)
+        }
+        return axios.get(endpoint.href, { headers: this._headers, })
     }
 
     /**
@@ -166,4 +121,4 @@ class MarvelAPI extends API {
     }
 }
 
-module.exports = new MarvelAPI()
+module.exports = MarvelAPI

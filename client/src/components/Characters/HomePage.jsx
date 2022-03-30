@@ -20,7 +20,7 @@ class HomePage extends Component {
     componentDidMount() {
 		const page = getURLParameter('page') ? Number.parseInt(getURLParameter('page')) : 1
         this.loadCharacters(page)
-				console.log(new marvelService)
+				console.log(new marvelService())
     }
 
     loadCharacters(page) {

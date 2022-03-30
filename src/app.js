@@ -32,22 +32,19 @@ app.use((req, res, next) => {
 
 const router = express.Router()
 
-// /characters
-router.get('/characters', async (req, res) => {
-    const page = req.query.page !== undefined ? req.query.page : 1
-    await marvelAPI.getChars(page)
+router.get('/comics', async (req, res) => {
+    await (new marvelAPI()).getComics()
         .then(payload => {
             res.statusCode = 200
-            res.send(JSON.stringify({ data: payload.data }))
+            res.send(JSON.stringify({ data: payload.data.data }))
         })
         .catch(err => {
             console.log(err)
             res.send(JSON.stringify(false))
         })
 })
-
-// /characters/search
-router.get('/characters/search', async (req, res) => {
+/*
+router.get('/comics/search', async (req, res) => {
     const filterOptions = ['name', 'status', 'species', 'type', 'gender']
     const filters = {}
     for (const filterOption of filterOptions) {
@@ -67,26 +64,7 @@ router.get('/characters/search', async (req, res) => {
             res.send(JSON.stringify(false))
         })
 })
-
-// /characters/{id}
-router.get('/characters/:id(\\d+)', async (req, res) => {
-    if (null === `${req.params.id}`.match(/^\d+$/)) {
-        res.statusCode = 400
-        return res.send({
-            "Message": "ID parameter must be a valid integer."
-        })
-    }
-    await marvelAPI.getCharacter(req.params.id)
-        .then(payload => {
-            res.statusCode = 200
-            res.send(JSON.stringify({ data: payload.data }))
-        })
-        .catch(err => {
-            console.log(err)
-            res.send(JSON.stringify(false))
-        })
-})
-
+*/
 app.use('/api/v1', router)
 
 /** Serving react with static path */
