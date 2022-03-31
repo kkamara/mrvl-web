@@ -112,6 +112,7 @@ const styles = {
     content: { 
       width: 320, 
       height: 700, 
+      backgroundImage: `url(${modalBackground})`,
     },
   },
   iconMobile: {
