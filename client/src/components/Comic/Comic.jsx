@@ -72,7 +72,7 @@ export default function Comic({ comic, }) {
           shouldCloseOnEsc={true}
           onRequestClose={handleCloseModalOperation}
           style={getModalStyles()}
-          // onAfterOpen={() => console.log('opened comic', comic)}
+          onAfterOpen={() => console.log('opened comic', comic)}
         >
          <Card sx={{ maxWidth: 345 }}>
           {__renderImage()}
@@ -86,7 +86,7 @@ export default function Comic({ comic, }) {
               {comic.title}
             </Typography>
             <Typography variant='body2' color='text.secondary'>
-              {comic.description}
+            <div dangerouslySetInnerHTML={ { __html: comic.description}} ></div>
             </Typography>
           </CardContent>
           <CardActions>

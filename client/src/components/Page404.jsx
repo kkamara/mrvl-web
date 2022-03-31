@@ -23,7 +23,6 @@ class Page404 extends React.Component {
         )
             .then(res => res.json())
             .then(res => {
-                console.log(res.data)
                 return res.data.images.original.url
             })
             .catch(err => {

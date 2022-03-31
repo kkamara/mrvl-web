@@ -36,7 +36,7 @@ const SimplePagination = ({ data }) => {
         if (disableRightPaginator) return
         window.location.href = `${window.location.origin}${window.location.pathname}?offset=${offset + 20}${uriEncodedFilters}`
     }
-console.log(data)
+    
     return <>
         <nav aria-label='Comic pagination'>
             <ul className='pagination justify-content-center'>
