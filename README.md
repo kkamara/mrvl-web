@@ -3,7 +3,7 @@ Browse and manage your favourite Marvel Comics.
 
 ## Installation
 
-* [Node](https://nodejs.org/en/) 
+* [Node.js](https://nodejs.org/en/) 
 * [npm](https://www.npmjs.com/get-npm) 
 * [Yarn](https://www.yarnpkg.com)
 
