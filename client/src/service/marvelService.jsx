@@ -14,7 +14,7 @@ export default class MarvelService{
         
         this.getComics()
             .then(res => {
-                console.log(res.data)
+                console.log(res.data.data)
             })
             .catch(err => {
                 console.log(err)
@@ -24,12 +24,21 @@ export default class MarvelService{
 
     /**
      * Return characters api response   
-     * @return {Promise}
+     * @returns {Promise}
      */
-    getComics() {
+    getComics(queryParams) {
         /** @var {string} endpoint */
-        let endpoint = new URL(`${this._url}/comics`)
-
+        const endpoint = new URL(`${this._url}/comics`)
+        if (
+            queryParams !== null &&
+            typeof queryParams === 'object' &&
+            Object.keys(queryParams).length
+        ) {
+            for(const key in queryParams) {
+                const val = queryParams[key]
+                endpoint.searchParams.append(key, val)
+            }
+        }
         return axios.get(endpoint.href, { headers: this._headers,})
     }
 }

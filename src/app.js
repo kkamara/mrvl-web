@@ -33,7 +33,7 @@ app.use((req, res, next) => {
 const router = express.Router()
 
 router.get('/comics', async (req, res) => {
-    await (new marvelAPI()).getComics()
+    await (new marvelAPI()).getComics(req.query)
         .then(payload => {
             res.statusCode = 200
             res.send(JSON.stringify({ data: payload.data.data }))
