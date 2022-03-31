@@ -2,3 +2,9 @@
 .comic-thumbnail {
   cursor: pointer;
 }
+
+@media screen and (max-width: 650px) {
+  .comic-thumbnail {
+    width: 350px;
+  }
+}

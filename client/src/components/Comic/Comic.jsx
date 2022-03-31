@@ -40,6 +40,13 @@ export default function Comic({ comic, }) {
       // style={{cursor:'pointer'}}
     />
   }
+
+  function getModalStyles() {
+    if (window.innerWidth < 650) {
+      return styles.comicModalMobile
+    }
+    return styles.comicModal
+  }
   
   return (
     <>
@@ -57,7 +64,7 @@ export default function Comic({ comic, }) {
           shouldCloseOnOverlayClick={true}
           shouldCloseOnEsc={true}
           onRequestClose={handleCloseModalOperation}
-          style={styles.comicModal}
+          style={getModalStyles()}
           // onAfterOpen={() => console.log('opened comic', comic)}
         >
          <Card sx={{ maxWidth: 345 }}>
@@ -91,6 +98,12 @@ const styles = {
       height: 730, 
       left: '40%', 
       backgroundImage: `url(${modalBackground})`,
+    },
+  },
+  comicModalMobile: {
+    content: { 
+      width: 320, 
+      height: 410, 
     },
   },
   icon: {
