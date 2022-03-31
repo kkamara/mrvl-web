@@ -47,6 +47,13 @@ export default function Comic({ comic, }) {
     }
     return styles.comicModal
   }
+
+  function getIconStyles() {
+    if (window.innerWidth < 650) {
+      return styles.iconMobile
+    }
+    return styles.icon
+  }
   
   return (
     <>
@@ -70,7 +77,7 @@ export default function Comic({ comic, }) {
          <Card sx={{ maxWidth: 345 }}>
           {__renderImage()}
           <FavoriteBorderIcon 
-            style={styles.icon}
+            style={getIconStyles()}
             fontSize='large' 
             color='warning' 
           />
@@ -103,8 +110,15 @@ const styles = {
   comicModalMobile: {
     content: { 
       width: 320, 
-      height: 410, 
+      height: 700, 
     },
+  },
+  iconMobile: {
+    cursor: 'pointer',
+    right: 32,
+    bottom: 620,
+    fontSize: 50,
+    position: 'absolute',
   },
   icon: {
     cursor: 'pointer',
