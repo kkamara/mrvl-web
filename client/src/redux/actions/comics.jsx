@@ -1,21 +1,24 @@
 // import { APP_URL } from "../../constants"
-import { characterActions } from "../reducers/types"
+import { comicsActions, } from "../reducers/types"
 
-export function getCharacter(id) {
+export function getComics(pageNumber = null) {
     return async dispatch => {
         return
-        // dispatch(request(characterActions.GET_CHARACTER_PENDING))
-        // let url = APP_URL + `/characters/${id}`
+        // dispatch(request(comicsActions.GET_COMICS_PENDING))
+        // let url = APP_URL + "/characters"
+
+        // if (pageNumber) url += `?page=${pageNumber}`
 
         // url = encodeURI(url)
         // await fetch(url)
         //     .then(res => res.json())
         //     .then(json => {
-        //         const payload = json.data ? json.data : false
-        //         dispatch(success(characterActions.GET_CHARACTER_SUCCESS, payload))
+        //         dispatch(
+        //             success(comicsActions.GET_COMICS_SUCCESS, json.data)
+        //         )
         //     })
         //     .catch(err => {
-        //         dispatch(error(characterActions.GET_CHARACTER_ERROR, err))
+        //         dispatch(error(comicsActions.GET_COMICS_ERROR, err))
         //     })
 
         function request(type) {

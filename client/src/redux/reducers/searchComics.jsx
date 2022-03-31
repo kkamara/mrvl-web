@@ -1,20 +1,20 @@
-import { characterActions } from "./types"
+import { searchComicsActions, } from "./types"
 
 const initialState = {
     data: false
 }
-const characterReducer = (state = initialState, action) => {
+const searchComicReducer = (state = initialState, action) => {
     switch (action.type) {
-        case characterActions.GET_CHARACTER_PENDING:
+        case searchComicsActions.SEARCH_COMICS_PENDING:
             return { ...state, fetched: false, isLoaded: false }
-        case characterActions.GET_CHARACTER_ERROR:
+        case searchComicsActions.SEARCH_COMICS_ERROR:
             return {
                 ...state,
                 fetched: false,
                 isLoaded: true,
                 error: action.payload
             }
-        case characterActions.GET_CHARACTER_SUCCESS:
+        case searchComicsActions.SEARCH_COMICS_SUCCESS:
             return {
                 ...state,
                 fetched: true,
@@ -25,4 +25,5 @@ const characterReducer = (state = initialState, action) => {
 
     return state
 }
-export default characterReducer
+
+export default searchComicReducer

@@ -1,20 +1,20 @@
-import { charactersActions } from "./types"
+import { comicsActions } from "./types"
 
 const initialState = {
     data: false
 }
-const charactersReducer = (state = initialState, action) => {
+const comicsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case charactersActions.GET_CHARACTERS_PENDING:
+        case comicsActions.GET_CHARACTERS_PENDING:
             return { ...state, fetched: false, isLoaded: false }
-        case charactersActions.GET_CHARACTERS_ERROR:
+        case comicsActions.GET_CHARACTERS_ERROR:
             return {
                 ...state,
                 fetched: false,
                 isLoaded: true,
                 error: action.payload
             }
-        case charactersActions.GET_CHARACTERS_SUCCESS:
+        case comicsActions.GET_CHARACTERS_SUCCESS:
             return {
                 ...state,
                 fetched: true,
@@ -26,4 +26,4 @@ const charactersReducer = (state = initialState, action) => {
     return state
 }
 
-export default charactersReducer
+export default comicsReducer

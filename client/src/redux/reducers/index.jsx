@@ -1,12 +1,11 @@
 import { combineReducers } from "redux"
 
-import searchCharactersReducer from "./searchCharacters"
-import charactersReducer from "./characters"
-import characterReducer from "./character"
+import searchComicsReducer from "./searchComics"
+import comicsReducer from "./comics"
+import comicReducer from "./comic"
 
-const reducers = combineReducers({
-    searchCharacters: searchCharactersReducer,
-    characters: charactersReducer,
-    character: characterReducer,
+export default combineReducers({
+    searchComics: searchComicsReducer,
+    comics: comicsReducer,
+    comic: comicReducer,
 })
-export default reducers

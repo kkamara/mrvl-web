@@ -1,11 +1,11 @@
 // import { APP_URL } from "../../constants"
-import { searchCharactersActions } from "../reducers/types"
-import { convertArrayToGETParams } from "../../utilities/methods"
+import { searchComicsActions, } from "../reducers/types"
+import { useQuery, } from "../../utilities/methods"
 
-export function searchCharacters(pageNumber = null, params = {}) {
+export function searchComics(pageNumber = null, params = {}) {
     return async dispatch => {
         return
-        // dispatch(request(searchCharactersActions.SEARCH_CHARACTERS_PENDING))
+        // dispatch(request(searchComicsActions.SEARCH_CHARACTERS_PENDING))
         // let url = APP_URL + "/characters/search"
 
         // let GETVars = convertArrayToGETParams(params)
@@ -31,10 +31,10 @@ export function searchCharacters(pageNumber = null, params = {}) {
         //                 filters: json.filters,
         //                 ...json.data,
         //             }
-        //         dispatch(success(searchCharactersActions.SEARCH_CHARACTERS_SUCCESS, payload))
+        //         dispatch(success(searchComicsActions.SEARCH_CHARACTERS_SUCCESS, payload))
         //     })
         //     .catch(err => {
-        //         dispatch(error(searchCharactersActions.SEARCH_CHARACTERS_ERROR, err))
+        //         dispatch(error(searchComicsActions.SEARCH_CHARACTERS_ERROR, err))
         //     })
 
         function request(type) {

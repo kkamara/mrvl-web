@@ -1,3 +1,5 @@
+import React, { useMemo, } from "react"
+import { useLocation, } from 'react-router-dom'
 
 export const convertArrayToGETParams = params => {
     let data = []
@@ -9,9 +11,8 @@ export const convertArrayToGETParams = params => {
     return data.join("&")
 }
 
-export const getURLParameter = name =>
-    decodeURIComponent(
-        (new RegExp('[?|&]' + name + '=' + '([^&]+?)(&|#||$)')
-            .exec(window.location.search) || [null, ''])[1]
-            .replace(/\+/g, '%20')
-    ) || null
+export function useQuery() {
+    const { search } = useLocation();
+  
+    return useMemo(() => new URLSearchParams(search), [search]);
+}
