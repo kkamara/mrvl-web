@@ -1,4 +1,4 @@
-// import { APP_URL } from "../../constants"
+// import { API_URL } from "../../constants"
 import { searchComicsActions, } from "../reducers/types"
 import { useQuery, } from "../../utilities/methods"
 
@@ -6,7 +6,7 @@ export function searchComics(pageNumber = null, params = {}) {
     return async dispatch => {
         return
         // dispatch(request(searchComicsActions.SEARCH_CHARACTERS_PENDING))
-        // let url = APP_URL + "/characters/search"
+        // let url = API_URL + "/characters/search"
 
         // let GETVars = convertArrayToGETParams(params)
 

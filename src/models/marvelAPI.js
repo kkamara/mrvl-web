@@ -183,6 +183,9 @@ class MarvelAPI extends API {
         ) {
             for (const key in queryParams) {
                 const val = queryParams[key]
+                if (null === val) {
+                    continue
+                }
                 if (!this.acceptedKey(key, val)) {
                     throw new Error(
                         `Query param (${key}, ${val} not accepted`

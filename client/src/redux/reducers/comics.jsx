@@ -1,24 +1,26 @@
 import { comicsActions } from "./types"
 
 const initialState = {
-    data: false
+    data: false,
+    fetched: false,
+    loading: true,
 }
 const comicsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case comicsActions.GET_CHARACTERS_PENDING:
-            return { ...state, fetched: false, isLoaded: false }
-        case comicsActions.GET_CHARACTERS_ERROR:
+        case comicsActions.GET_COMICS_PENDING:
+            return { ...state, fetched: false, loading: false }
+        case comicsActions.GET_COMICS_ERROR:
             return {
                 ...state,
                 fetched: false,
-                isLoaded: true,
+                loading: true,
                 error: action.payload
             }
-        case comicsActions.GET_CHARACTERS_SUCCESS:
+        case comicsActions.GET_COMICS_SUCCESS:
             return {
                 ...state,
                 fetched: true,
-                isLoaded: true,
+                loading: true,
                 data: action.payload
             }
     }

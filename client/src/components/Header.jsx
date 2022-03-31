@@ -23,7 +23,8 @@ const Header = () => (
 
 const styles = {
     header: {
-        marginTop: 30
+        marginTop: 30,
+        marginBottom: 70,
     }
 }
 

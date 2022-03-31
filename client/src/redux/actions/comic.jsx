@@ -1,11 +1,11 @@
-// import { APP_URL } from "../../constants"
+// import { API_URL } from "../../constants"
 import { comicsActions, } from "../reducers/types"
 
 export function getComic(id) {
     return async dispatch => {
         return
         // dispatch(request(comicsActions.GET_COMIC_PENDING))
-        // let url = APP_URL + `/characters/${id}`
+        // let url = API_URL + `/characters/${id}`
 
         // url = encodeURI(url)
         // await fetch(url)

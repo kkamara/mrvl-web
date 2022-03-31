@@ -6,19 +6,19 @@ const initialState = {
 const searchComicReducer = (state = initialState, action) => {
     switch (action.type) {
         case searchComicsActions.SEARCH_COMICS_PENDING:
-            return { ...state, fetched: false, isLoaded: false }
+            return { ...state, fetched: false, loading: false }
         case searchComicsActions.SEARCH_COMICS_ERROR:
             return {
                 ...state,
                 fetched: false,
-                isLoaded: true,
+                loading: true,
                 error: action.payload
             }
         case searchComicsActions.SEARCH_COMICS_SUCCESS:
             return {
                 ...state,
                 fetched: true,
-                isLoaded: true,
+                loading: true,
                 data: action.payload
             }
     }

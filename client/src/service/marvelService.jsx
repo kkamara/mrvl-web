@@ -11,15 +11,6 @@ export default class MarvelService{
      */
     constructor(http=null) {
         this._url = API_URL
-        
-        this.getComics()
-            .then(res => {
-                console.log(res.data.data)
-            })
-            .catch(err => {
-                console.log(err)
-                throw err
-            })
     }
 
     /**
@@ -36,6 +27,9 @@ export default class MarvelService{
         ) {
             for(const key in queryParams) {
                 const val = queryParams[key]
+                if (val === null) {
+                    continue
+                }
                 endpoint.searchParams.append(key, val)
             }
         }

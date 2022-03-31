@@ -1,57 +1,53 @@
-import React from "react"
-import { withRouter } from "react-router-dom"
-import $ from 'jquery'
+import React from 'react'
+import { withRouter } from 'react-router-dom'
+import { useQuery, } from '../../utilities/methods'
 
 const SimplePagination = ({ data }) => {
-    // handle whether link buttons are disabled
-    let paginateLeftBtn = $('#paginate-left')
-    let paginateRightBtn = $('#paginate-right')
-    let leftPaginatorDisabled = false, rightPaginatorDisabled = false
-    if (data.offset < 0) {
-        leftPaginatorDisabled = true
-        paginateLeftBtn.prop('disabled', true)
+    const query = useQuery()
+    let offset = 0
+
+    let queryOffset = query.get('offset')
+    if (queryOffset && !isNaN(parseInt(queryOffset))) {
+        offset = parseInt(queryOffset)
     }
-    if (data.offset > (data.total + data.offset)) {
-        rightPaginatorDisabled = true
-        paginateRightBtn.prop('disabled', true)
+
+    let disableLeftPaginator = false,
+        disableRightPaginator = false
+    if (offset < 1) {
+        disableLeftPaginator = true
+    }
+    if (offset > (data.total + offset)) {
+        disableRightPaginator = true
     }
 
     let uriEncodedFilters = ''
     if (
         typeof data.filters !== 'undefined' &&
-        typeof data.filters === "string" &&
+        typeof data.filters === 'string' &&
         data.filters.length
     ) uriEncodedFilters += `&${data.filters}`
 
     const leftPaginateBtnClick = e => {
-        if (leftPaginatorDisabled) return
-        window.location.href = `${window.location.origin}${window.location.pathname}?offset=${data.offset - 20}${uriEncodedFilters}`
+        if (disableLeftPaginator) return
+        window.location.href = `${window.location.origin}${window.location.pathname}?offset=${offset - 20}${uriEncodedFilters}`
     }
 
     const rightPaginateBtnClick = e => {
-        if (rightPaginatorDisabled) return
-        window.location.href = `${window.location.origin}${window.location.pathname}?offset=${data.offset + 20}${uriEncodedFilters}`
+        if (disableRightPaginator) return
+        window.location.href = `${window.location.origin}${window.location.pathname}?offset=${offset + 20}${uriEncodedFilters}`
     }
-
+console.log(data)
     return <>
-        <button
-            disabled={leftPaginatorDisabled}
-            onClick={leftPaginateBtnClick}
-            className="btn btn-default"
-            id="paginate-left"
-        >
-            <i className="far fa-arrow-alt-circle-left"></i>
-        </button>
-        <div className="float-right">
-            <button
-                disabled={rightPaginatorDisabled}
-                onClick={rightPaginateBtnClick}
-                className="btn btn-default"
-                id="paginate-right"
-            >
-                <i className="far fa-arrow-alt-circle-right"></i>
-            </button>
-        </div>
+        <nav aria-label='Comic pagination'>
+            <ul className='pagination justify-content-center'>
+                <li onClick={leftPaginateBtnClick} className={`page-item ${disableLeftPaginator ? 'disabled' : ''}`}>
+                    <a className='page-link' href='#'>Previous</a>
+                </li>
+                <li onClick={rightPaginateBtnClick} className={`page-item ${disableRightPaginator ? 'disabled' : ''}`}>
+                    <a className='page-link' href='#'>Next</a>
+                </li>
+            </ul>
+        </nav>
     </>
 }
 

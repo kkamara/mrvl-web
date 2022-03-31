@@ -1,25 +1,18 @@
-// import { APP_URL } from "../../constants"
 import { comicsActions, } from "../reducers/types"
+import marvelService from "../../service/marvelService"
 
-export function getComics(pageNumber = null) {
+export function getComics(offset = null) {
     return async dispatch => {
-        return
-        // dispatch(request(comicsActions.GET_COMICS_PENDING))
-        // let url = APP_URL + "/characters"
-
-        // if (pageNumber) url += `?page=${pageNumber}`
-
-        // url = encodeURI(url)
-        // await fetch(url)
-        //     .then(res => res.json())
-        //     .then(json => {
-        //         dispatch(
-        //             success(comicsActions.GET_COMICS_SUCCESS, json.data)
-        //         )
-        //     })
-        //     .catch(err => {
-        //         dispatch(error(comicsActions.GET_COMICS_ERROR, err))
-        //     })
+        dispatch(request(comicsActions.GET_COMICS_PENDING))
+        await (new marvelService()).getComics({offset,})
+            .then(json => {
+                dispatch(
+                    success(comicsActions.GET_COMICS_SUCCESS, json.data.data)
+                )
+            })
+            .catch(err => {
+                dispatch(error(comicsActions.GET_COMICS_ERROR, err))
+            })
 
         function request(type) {
             return {

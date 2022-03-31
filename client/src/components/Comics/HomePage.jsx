@@ -12,22 +12,24 @@ import { APP_NAME, } from "../../constants"
 
 import './HomePage.scss'
 
-import marvelService from '../../service/marvelService'
+const HomePage = ({ comics, getComics, }) => {
+	const query = useQuery()
+	let offset = 0
 
-const HomePage = ({}) => {
+	let queryOffset = query.get('offset')
+	if (queryOffset && !isNaN(parseInt(queryOffset))) {
+			offset = parseInt(queryOffset)
+	}
+
+	const { data, fetched, loading, } = comics
 	const pageTitle = `Home | ${APP_NAME}`
 
-	let page = (useQuery()).get('page') 
-	if (Number.parseInt(page)) {
-		page = 1
-	}
 	useEffect(() => {
-		// this.loadCharacters(page)
-		console.log(new marvelService())
+		loadComics(offset)
 	}, [])
 
-	const loadCharacters = (page) => {
-			getComics(page)
+	const loadComics = (offset) => {
+			getComics(offset)
 	}
 
 	const __renderHeaderTags = () => {
@@ -37,8 +39,6 @@ const HomePage = ({}) => {
 	}
 
 	const __renderComics = () => {
-		const { data } = this.props.comics
-
 		if (
 			!data ||
 			!(
@@ -49,29 +49,23 @@ const HomePage = ({}) => {
 		) {
 			return <p>No results to display your query.</p>
 		}
-
+		
 		return data.results.map((comic, key) =>
 			<Comic key={key} comic={comic}/>
 		)
 	}
 
-	const { data, fetched, loading } = { fetched: false, loading: false, }
 	let content = null
 
 	if (fetched && loading) {
 		content = (
-			<div className="container">
-				<div className="col-md-4 offset-md-4">
-					<div className="card">
-						<div className="card-body">
-							<div className="card-text">
-								{/* {this.__renderComics()} */}
-							</div>
-						</div>
-						<div className="card-footer">
-							<SimplePagination data={data} />
-						</div>
-					</div>
+			<div className="container text-center">
+				<div className="content-header">
+					<SimplePagination data={data} />
+				</div>
+				{__renderComics()}
+				<div className="content-footer">
+					<SimplePagination data={data} />
 				</div>
 			</div>
 		)
@@ -91,7 +85,7 @@ const mapStateToProps = state => ({
     comics: state.comics
 })
 const mapDispatchToProps = dispatch => ({
-    getComics: page => dispatch(getComics(page)),
+    getComics: offset => dispatch(getComics(offset)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
