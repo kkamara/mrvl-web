@@ -57,13 +57,14 @@ export default function Comic({ comic, }) {
   
   return (
     <>
-      <div className='comic-thumbnail-container' onClick={handleOpenModalOperation}>
+      <div className='comic-thumbnail-container'>
         <img 
+          onClick={handleOpenModalOperation}
           className='comic-thumbnail'
           src={comic.thumbnail.path+'.'+comic.thumbnail.extension} 
           alt={comic.title} 
         />
-        <p>{comic.title}</p>
+        <p onClick={handleOpenModalOperation}>{comic.title}</p>
       </div>
       <Modal
           isOpen={open}
