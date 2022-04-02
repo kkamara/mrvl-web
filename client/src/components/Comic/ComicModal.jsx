@@ -42,8 +42,8 @@ function ComicModal({
 
   const handleUnfavouriteComicClick = () => {
     unFavComic(comic.id)
-    handleCloseModalOperation()
-    if (true !== fetchFavItems) {
+    if (fetchFavItems) {
+      handleCloseModalOperation()
       unFavComicCallback(fetchFavItems)
     }
   }
