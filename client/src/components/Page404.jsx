@@ -2,6 +2,8 @@ import React from "react"
 import { GIPHY_API_KEY } from "../constants"
 import Loader from "./Loader"
 
+import './Page404.scss'
+
 class Page404 extends React.Component {
     state = {
         giphyImageUrl: null
@@ -44,7 +46,11 @@ class Page404 extends React.Component {
                     <div className="text-center">
                         <h2>Oops, page not found</h2>
                         {giphyImageUrl ? (
-                            <img src={giphyImageUrl} alt="404_image" />
+                            <img 
+                                className="image-404" 
+                                src={giphyImageUrl} 
+                                alt="404_image" 
+                            />
                         ) : (
                             <div />
                         )}
