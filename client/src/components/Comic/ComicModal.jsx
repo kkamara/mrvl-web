@@ -86,7 +86,6 @@ function ComicModal({
   }
   
   function __renderFavouriteIcon() {
-    console.log(favComics)
     if (!favComics.ids.includes(comic.id)) {
       return <FavoriteBorderIcon 
         onClick={handleFavouriteComicClick}
