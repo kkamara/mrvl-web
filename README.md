@@ -24,6 +24,10 @@ Browse and manage your favourite Marvel Comics.
   # see ./package.json and client/package.json for change
 ```
 
+## Misc
+
+Each Marvel API key ([see environment variables](https://raw.githubusercontent.com/kkamara/mrvl/main/.env.example)) has a request limit of 3000/day.
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
