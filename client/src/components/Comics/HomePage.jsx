@@ -3,6 +3,7 @@ import { connect, } from "react-redux"
 import { Helmet, } from "react-helmet"
 
 import { getComics, } from "../../redux/actions/comics"
+import { getFavComics, } from "../../redux/actions/comic"
 import SimplePagination from "../Pagination/SimplePagination"
 import Comic from '../Comic'
 
@@ -12,7 +13,11 @@ import { APP_NAME, } from "../../constants"
 
 import './HomePage.scss'
 
-const HomePage = ({ comics, getComics, }) => {
+const HomePage = ({ 
+	comics, 
+	getComics,
+	getFavComics,
+}) => {
 	const query = useQuery()
 	let offset = 0
 
@@ -26,10 +31,15 @@ const HomePage = ({ comics, getComics, }) => {
 
 	useEffect(() => {
 		loadComics(offset)
+		loadFavComics()
 	}, [])
 
 	const loadComics = (offset) => {
-			getComics(offset)
+		getComics(offset)
+	}
+
+	const loadFavComics = () => {
+		getFavComics()
 	}
 
 	const __renderHeaderTags = () => {
@@ -57,7 +67,7 @@ const HomePage = ({ comics, getComics, }) => {
 
 	let content = null
 
-	if (fetched && loading) {
+	if (fetched && !loading) {
 		content = (
 			<div className="container text-center">
 				<div className="content-header">
@@ -69,10 +79,10 @@ const HomePage = ({ comics, getComics, }) => {
 				</div>
 			</div>
 		)
-			} else if (!fetched && loading) {
-				content = <div>Unknown error encountered</div>
-		} else {
-			content = <Loader />
+	} else if (!fetched && loading) {
+		content = <Loader />
+	} else {
+		content = <div>Unknown error encountered</div>
 	}
 
 	return <>
@@ -82,10 +92,11 @@ const HomePage = ({ comics, getComics, }) => {
 }
 
 const mapStateToProps = state => ({
-    comics: state.comics
+	comics: state.comics,
 })
 const mapDispatchToProps = dispatch => ({
-    getComics: offset => dispatch(getComics(offset)),
+	getComics: offset => dispatch(getComics(offset)),
+	getFavComics: (fetchFavItems) => dispatch(getFavComics(fetchFavItems)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage)

@@ -43,6 +43,18 @@ router.get('/comics', async (req, res) => {
             res.send(JSON.stringify(false))
         })
 })
+
+router.get('/comics/:id', async (req, res) => {
+    await (new marvelAPI()).getComic(req.params.id)
+        .then(payload => {
+            res.statusCode = 200
+            res.send(JSON.stringify({ data: payload.data.data.results[0], }))
+        })
+        .catch(err => {
+            console.log(err)
+            res.send(JSON.stringify(false))
+        })
+})
 /*
 router.get('/comics/search', async (req, res) => {
     const filterOptions = ['name', 'status', 'species', 'type', 'gender']

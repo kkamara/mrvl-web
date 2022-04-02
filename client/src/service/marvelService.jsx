@@ -15,6 +15,7 @@ export default class MarvelService{
 
     /**
      * Return characters api response   
+     * @param {obj} queryParams
      * @returns {Promise}
      */
     getComics(queryParams) {
@@ -33,6 +34,17 @@ export default class MarvelService{
                 endpoint.searchParams.append(key, val)
             }
         }
+        return axios.get(endpoint.href, { headers: this._headers,})
+    }
+
+    /**
+     * Return characters api response   
+     * @param {string} id
+     * @returns {Promise}
+     */
+    getComic(id) {
+        /** @var {string} endpoint */
+        const endpoint = new URL(`${this._url}/comics/${id}`)
         return axios.get(endpoint.href, { headers: this._headers,})
     }
 }

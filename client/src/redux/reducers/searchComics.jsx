@@ -17,8 +17,8 @@ const searchComicReducer = (state = initialState, action) => {
         case searchComicsActions.SEARCH_COMICS_SUCCESS:
             return {
                 ...state,
-                fetched: true,
-                loading: true,
+                fetched: false,
+                loading: false,
                 data: action.payload
             }
     }

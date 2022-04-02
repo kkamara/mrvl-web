@@ -1,22 +1,147 @@
-// import { API_URL } from "../../constants"
-import { comicsActions, } from "../reducers/types"
+import { comicActions, } from '../reducers/types'
+import marvelService from "../../service/marvelService"
 
-export function getComic(id) {
+const STORAGE_KEY = 'fav-comic-ids'
+
+export function favComic(id) {
     return async dispatch => {
-        return
-        // dispatch(request(comicsActions.GET_COMIC_PENDING))
-        // let url = API_URL + `/characters/${id}`
+        dispatch(request(comicActions.FAVOURITE_COMIC_PENDING))
 
-        // url = encodeURI(url)
-        // await fetch(url)
-        //     .then(res => res.json())
-        //     .then(json => {
-        //         const payload = json.data ? json.data : false
-        //         dispatch(success(comicsActions.GET_COMIC_SUCCESS, payload))
-        //     })
-        //     .catch(err => {
-        //         dispatch(error(comicsActions.GET_COMIC_ERROR, err))
-        //     })
+        let favComics = [id,]
+        let storedComics = localStorage.getItem(STORAGE_KEY)
+        if (null !== storedComics) {
+            try {
+                storedComics = JSON.parse(storedComics)
+                favComics = [ ...storedComics, ...favComics, ]
+            } catch (err) {
+                return dispatch(
+                    error(comicActions.FAVOURITE_COMIC_ERROR, err.message)
+                )
+            }
+        }
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(favComics))
+        
+        dispatch(
+            success(comicActions.FAVOURITE_COMIC_SUCCESS, { ids: favComics, })
+        )
+
+        function request(type) {
+            return {
+                type
+            }
+        }
+
+        function error(type, payload) {
+            return {
+                type,
+                payload
+            }
+        }
+
+        function success(type, payload) {
+            return {
+                type,
+                payload
+            }
+        }
+    }
+}
+
+export function unFavComic(id) {
+    return async dispatch => {
+        dispatch(request(comicActions.UNFAVOURITE_COMIC_PENDING))
+
+        let storedComics = localStorage.getItem(STORAGE_KEY)
+        if (null === storedComics) {
+            return dispatch(
+                success(comicActions.UNFAVOURITE_COMIC_SUCCESS, { ids: [], })
+            )
+        }
+
+        try {
+            storedComics = JSON.parse(storedComics)
+        } catch (err) {
+            return dispatch(
+                error(comicActions.UNFAVOURITE_COMIC_ERROR, err.message)
+            )
+        }
+
+        storedComics = storedComics.filter(comicID => comicID !== id)
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(storedComics))
+        
+        dispatch(
+            success(comicActions.UNFAVOURITE_COMIC_SUCCESS, { ids: storedComics, })
+        )
+
+        function request(type) {
+            return {
+                type
+            }
+        }
+
+        function error(type, payload) {
+            return {
+                type,
+                payload
+            }
+        }
+
+        function success(type, payload) {
+            return {
+                type,
+                payload
+            }
+        }
+    }
+}
+
+export function getFavComics(fetchFavItems=false) {
+    return async dispatch => {
+        dispatch(request(comicActions.GET_FAVOURITE_COMICS_PENDING))
+
+        let favComics = localStorage.getItem(STORAGE_KEY)
+        if (null === favComics) {
+            favComics = []
+            return dispatch(
+                success(comicActions.GET_FAVOURITE_COMICS_SUCCESS, { items: [], })
+            )
+        } else {
+            try {
+                favComics = JSON.parse(favComics)
+            } catch (err) {
+                return dispatch(
+                    error(comicActions.GET_FAVOURITE_COMICS_ERROR, err.message)
+                )
+            }
+        }
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(favComics))
+
+        let result = []
+        
+        if (fetchFavItems) {
+            for (const id of favComics) {
+                try {
+                    await (new marvelService()).getComic(id)
+                        .then(json => {
+                            result.push(json.data.data)
+                        })
+                        .catch(err => {
+                            throw err
+                        })
+                } catch(err) {
+                    return dispatch(error(comicActions.GET_FAVOURITE_COMICS_ERROR, err.message))
+                }
+            }
+        }
+
+        dispatch(
+            success(
+                comicActions.GET_FAVOURITE_COMICS_SUCCESS, 
+                { ids: favComics, items: result, },
+            )
+        )
 
         function request(type) {
             return {

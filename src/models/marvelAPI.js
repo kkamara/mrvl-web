@@ -171,6 +171,7 @@ class MarvelAPI extends API {
 
     /**
      * Return a single character api response
+     * @param {obj} queryParams
      * @return {Promise}
      */
     getComics(queryParams) {
@@ -195,6 +196,28 @@ class MarvelAPI extends API {
             }
             urlParams = {...urlParams, ...queryParams,}
         }
+
+        for (let key in urlParams) {
+            const val = urlParams[key]
+            switch(key) {
+                case 'apiKey':
+                    key = 'apikey'
+                default:
+                    break
+            }
+            endpoint.searchParams.append(key, val)
+        }
+        return axios.get(endpoint.href, { headers: this._headers, })
+    }
+
+    /**
+     * Return a single character api response
+     * @param {number|string} id
+     * @return {Promise}
+     */
+    getComic(id) {
+        const endpoint = new URL(`${marvelURL}/public/comics/${id}`)
+        let urlParams = this.generateKeys()
 
         for (let key in urlParams) {
             const val = urlParams[key]
