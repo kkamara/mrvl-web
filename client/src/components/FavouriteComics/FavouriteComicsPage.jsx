@@ -52,7 +52,9 @@ const FavouriteComicsPage = ({ getFavComics, comic, }) => {
 	} else if (!fetched && loading) {
 		content = <Loader />
 	} else {
-		content = <div>Unknown error encountered</div>
+		content = <div className="container">
+			<div>Unknown error encountered</div>
+		</div>
 	}
 
 	return <>
