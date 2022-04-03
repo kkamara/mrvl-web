@@ -5,7 +5,7 @@ import { applyMiddleware, createStore } from 'redux'
 import reducers from './redux/reducers/index'
 import thunk from 'redux-thunk'
 
-import logger from 'redux-logger'
+// import logger from 'redux-logger'
 // import promise from 'redux-promise-middleware'
 import { Provider } from 'react-redux'
 
@@ -25,9 +25,10 @@ const store = createStore(reducers, middleware)
 // const RootWithSession = withSession(Root)
 
 ReactDOM.render(
-    <FlagsmithProvider options={{
-        environmentID: FLAGSMITH_ENVIRONMENT_KEY,
-    }} flagsmith={flagsmith}>
+    <FlagsmithProvider 
+        options={{ environmentID: FLAGSMITH_ENVIRONMENT_KEY, }} 
+        flagsmith={flagsmith}
+    >
         <Provider store={store}>
             <App />
         </Provider>
