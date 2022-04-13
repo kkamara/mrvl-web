@@ -7,7 +7,7 @@ const app = express()
 
 const marvelAPI = require('./models/marvelAPI')
 
-const path = require('path')
+const path = require('node:path')
 
 /** serving react with static path */
 const buildPath = path.join(
