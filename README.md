@@ -14,19 +14,6 @@ Browse and manage your favourite Marvel Comics.
 
 ## Usage
 
-In [./client/src/constants.jsx](https://github.com/kkamara/mrvl/blob/main/client/src/constants.jsx) change the following constants:
-```bash
-export const API_URL = 'https://mrvl.herokuapp.com/api/v1'
-export const ENV = 'prod'
-// export const API_URL = 'http://localhost:3000/api/v1'
-// export const ENV = 'local'
-# to
-// export const API_URL = 'https://mrvl.herokuapp.com/api/v1'
-// export const ENV = 'prod'
-export const API_URL = 'http://localhost:3000/api/v1'
-export const ENV = 'local'
-```
-
 ```bash
   cp .env.example .env
   yarn install
