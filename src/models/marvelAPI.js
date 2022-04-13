@@ -139,6 +139,7 @@ class MarvelAPI extends API {
 
     /**
      * @param {string} key
+     * @param {any} value
      * @returns {bool}
      */
     acceptedKey(key, value) {
@@ -176,6 +177,7 @@ class MarvelAPI extends API {
      */
     getComics(queryParams) {
         const endpoint = new URL(`${marvelURL}/public/comics`)
+        
         let urlParams = this.generateKeys()
         if (
             queryParams !== null &&
