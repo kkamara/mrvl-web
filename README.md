@@ -14,8 +14,19 @@ Browse and manage your favourite Marvel Comics.
 
 ## Usage
 
+Update https://github.com/kkamara/mrvl/blob/main/client/src/constants.jsx to the following:
+
+```bash
+// export const API_URL = 'https://mrvl.herokuapp.com/api/v1'
+// export const ENV = 'prod'
+export const API_URL = 'http://localhost:3000/api/v1'
+export const ENV = 'local'
+```
+
+Start the server:
 ```bash
   cp .env.example .env
+  export NODE_OPTIONS=--openssl-legacy-provider
   yarn install
   yarn dev
   # defaults:
