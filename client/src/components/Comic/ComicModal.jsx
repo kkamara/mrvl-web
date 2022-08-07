@@ -1,6 +1,9 @@
 import React, { useState, } from 'react'
 import { connect } from 'react-redux'
+import { useLocation, } from 'react-router-dom'
 import Modal from 'react-modal'
+import { useFlags, } from 'flagsmith/react'
+import { ENV, } from '../../constants'
 
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
@@ -24,16 +27,28 @@ function ComicModal({
   favComics,
   unFavComic,
   favComic,
+  history,
   comic,
 }) {
-  const [open, setOpen] = useState(false)
+  const flags = useFlags(['copy_link_feature'],)
 
+  const [open, setOpen] = useState(false)
+	
   const handleOpenModalOperation = () => {
     setOpen(true)
   }
 
   const handleCloseModalOperation = () => {
     setOpen(false)
+  }
+
+  const handleLinkClickOperation = () => {
+    const domain = new URL(window.location.href)
+    const url = domain.origin + '/comic/' + comic.id
+    navigator.clipboard.writeText(url)
+    const msg = url + ' has been successfully copied to clipboard.'
+    console.log(msg)
+    alert(msg)
   }
 
   const handleFavouriteComicClick = () => {
@@ -104,7 +119,7 @@ function ComicModal({
   
   return (
     <>
-      <div className='comic-thumbnail-container'>
+      <div className='comic-thumbnail-container' id={comic.id}>
         <img 
           onClick={handleOpenModalOperation}
           className='comic-thumbnail'
@@ -135,6 +150,15 @@ function ComicModal({
           </CardContent>
           <CardActions>
             <a onClick={handleCloseModalOperation} className='link-warning close-modal-btn'>Close</a>
+            {flags.copy_link_feature.enabled && flags.copy_link_feature.value === ENV ?
+              <a 
+                onClick={handleLinkClickOperation} 
+                className='link-primary close-modal-btn'
+	        style={styles.copyLinkBtn}
+              >
+                Copy Link
+              </a> :
+            null}
           </CardActions>
         </Card>
       </Modal>
@@ -171,6 +195,10 @@ const styles = {
     bottom: 645,
     fontSize: 50,
     position: 'absolute',
+  },
+  copyLinkBtn: {
+    position: 'absolute',
+    right: 27,
   },
 }
 
