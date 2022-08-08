@@ -44,6 +44,79 @@ router.get('/comics', async (req, res) => {
         })
 })
 
+function isValidType(subject, typeToMatch) {
+    let result = false
+
+    if (undefined === subject) {
+        return result
+    }
+
+    switch(typeToMatch) {
+        case 'string':
+            if (subject.match(/\w+/g)) {
+                result = true
+            }
+            break
+        case 'boolean':
+            if (subject === 'false' | subject === 'true') {
+                result = true
+            }
+            break
+        case 'number':
+            if (!isNaN(Number.parseInt(subject))) {
+                result = true
+            }
+            break
+        case 'date':
+            if (subject.match(/\d{4}-\d{2}-\d{2}/g)) {
+                result = true
+            }
+            break
+    }
+    return result
+}
+
+router.get('/comics/search', async (req, res) => {
+    const api = new marvelAPI()
+    const filterOptions = Object.assign({}, api._comic_filters)
+    const filters = {}
+    const errors = {}
+    for (const fOption in filterOptions) {
+        if (!isValidType(req.query[fOption], filterOptions[fOption]['type'])) {
+            errors[fOption] = 'Type must match '+filterOptions[fOption]['type']
+            continue
+        }
+        if (
+            filterOptions[fOption]['options'] &&
+            !filterOptions[fOption]['options'].includes(req.query[fOption])
+        ) {
+            errors[fOption] = 'Value must be one of '+filterOptions[fOption]['options'].join(', ')
+            continue
+        }
+        filters[fOption] = req.query[fOption]
+    }
+    if (Object.keys(errors).length) {
+        res.statusCode = 400
+        return res.send(JSON.stringify({
+            'error': 'Unsuccessful',
+            'message': errors,
+        }))
+    }
+    await api.getComics(req.query)
+        .then((payload) => {
+            res.statusCode = 200
+            res.send(JSON.stringify({ data: payload.data }))
+        })
+        .catch(err => {
+            console.log(err)
+            res.statusCode = 500
+            res.send(JSON.stringify({
+                'error': 'Unsuccessful',
+                'message': err.message,
+            }))
+        })
+})
+
 router.get('/comics/:id', async (req, res) => {
     await (new marvelAPI()).getComic(req.params.id)
         .then(payload => {
@@ -52,31 +125,14 @@ router.get('/comics/:id', async (req, res) => {
         })
         .catch(err => {
             console.log(err)
-            res.send(JSON.stringify(false))
+            res.statusCode = 500
+            res.send(JSON.stringify({
+                'error': 'Unsuccessful',
+                'message': err.message,
+            }))
         })
 })
-/*
-router.get('/comics/search', async (req, res) => {
-    const filterOptions = ['name', 'status', 'species', 'type', 'gender']
-    const filters = {}
-    for (const filterOption of filterOptions) {
-        if (undefined !== req.query[filterOption]) {
-            filters[filterOption] = req.query[filterOption]
-        }
-    }
-    const strFilters = marvelAPI.uriEncodeArray(filters)
-    const page = req.query.page !== undefined ? req.query.page : 1
-    await marvelAPI.search(strFilters, page)
-        .then((payload) => {
-            res.statusCode = 200
-            res.send(JSON.stringify({ data: payload.data }))
-        })
-        .catch(err => {
-            console.log(err)
-            res.send(JSON.stringify(false))
-        })
-})
-*/
+
 app.use('/api/v1', router)
 
 /** Serving react with static path */

@@ -171,7 +171,7 @@ class MarvelAPI extends API {
     }
 
     /**
-     * Return a single character api response
+     * Return searchable paginated characters api response
      * @param {obj} queryParams
      * @return {Promise}
      */
@@ -196,7 +196,6 @@ class MarvelAPI extends API {
                 }
                 endpoint.searchParams.append(key, val)
             }
-            urlParams = {...urlParams, ...queryParams,}
         }
 
         for (let key in urlParams) {
@@ -260,49 +259,6 @@ class MarvelAPI extends API {
         }
 
         return result
-    }
-
-    /**
-     * Validate search input fields.
-     * @param  object - input values for querying R&M characters
-     * @return array|false
-     */
-    validateSearchParams({ name, status, species, type, gender }) {
-        const result = []
-
-        if (name && 255 <= name.length) {
-            result["name"] = "The name exceeds 255 character limit."
-        }
-
-        /** @var {array} statuses */
-        const statuses = ['alive', 'dead', 'unknown']
-        if (status) {
-            if (255 <= status.length) {
-                result["status"] = "The status exceeds 255 character limit."
-            } else if (!status.includes(statuses)) {
-                result["status"] = `The status must be one of ${statuses.join(', ')}.`
-            }
-        }
-
-        if (species && 255 <= species.length) {
-            result["species"] = "The species exceeds 255 character limit."
-        }
-
-        if (type && 255 <= type.length) {
-            result["type"] = "The type exceeds 255 character limit."
-        }
-
-        /** @var {array} genderOptions */
-        const genderOptions = ['female', 'male', 'genderless', 'unknown']
-        if (gender) {
-            if (255 <= gender.length) {
-                result["gender"] = "The gender exceeds 255 character limit."
-            } else if (!gender.includes(genderOptions)) {
-                result["gender"] = `The gender must be one of ${genderOptions.join(', ')}.`
-            }
-        }
-
-        return result.length ? result : false
     }
 }
 
