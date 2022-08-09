@@ -197,7 +197,7 @@ const styles = {
   comicModalMobile: {
     content: { 
       width: 320, 
-      height: 700, 
+      height: 550, 
       backgroundImage: `url(${modalBackground})`,
     },
   },
