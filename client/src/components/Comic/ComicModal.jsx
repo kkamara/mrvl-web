@@ -74,7 +74,7 @@ function ComicModal({
     let innerStyles = { 
       ...styles.icon, 
       right: 32,
-      bottom: 645,
+      bottom: 548,
       position: 'absolute',
     }
     if (window.innerWidth < 650) {
