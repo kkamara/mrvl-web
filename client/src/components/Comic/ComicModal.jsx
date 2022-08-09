@@ -93,7 +93,7 @@ function ComicModal({
     }
     return <CardMedia
       component='img'
-      height='500'
+      height='450'
       image={image}
       alt={comic.title}
       className='comic-image'
@@ -145,16 +145,32 @@ function ComicModal({
               {comic.title}
             </Typography>
             <Typography variant='body2' color='text.secondary'>
-              <span dangerouslySetInnerHTML={ { __html: comic.description}} ></span>
+              <span dangerouslySetInnerHTML={{ __html: comic.description, }} ></span>
             </Typography>
           </CardContent>
+          <hr/>
           <CardActions>
-            <a onClick={handleCloseModalOperation} className='link-warning close-modal-btn'>Close</a>
+            <a 
+              className='btn btn-dark store-page-link'
+	            href={comic.urls[0].url}
+              style={styles.linkBtn}
+            >
+              Store page
+            </a>
+          </CardActions>
+          <CardActions>
+            <a 
+              onClick={handleCloseModalOperation} 
+              className='btn btn-warning close-modal-btn close-modal-btn'
+              style={styles.linkBtn}
+            >
+              Close
+            </a>
             {flags.copy_link_feature.enabled && flags.copy_link_feature.value === ENV ?
               <a 
                 onClick={handleLinkClickOperation} 
-                className='link-primary close-modal-btn'
-	        style={styles.copyLinkBtn}
+                className='btn btn-primary close-modal-btn copy-link-btn'
+	              style={{ ...styles.linkBtn, ...styles.copyLinkBtn }}
               >
                 Copy Link
               </a> :
@@ -167,10 +183,13 @@ function ComicModal({
 }
 
 const styles = {
+  linkBtn: {
+    textDecoration: 'none',
+  },
   comicModal: { 
     content: { 
       width: 375, 
-      height: 730, 
+      height: 630, 
       left: '40%', 
       backgroundImage: `url(${modalBackground})`,
     },
