@@ -82,7 +82,7 @@ router.get('/comics/filters', async (req, res) => {
 
 router.get('/comics/search', async (req, res) => {
     const api = new marvelAPI()
-    const filterOptions = Object.assign({}, api._comic_filters)
+    const filterOptions = Object.assign({}, api.comic_filters)
     const filters = {}
     const errors = {}
     for (const fOption in filterOptions) {

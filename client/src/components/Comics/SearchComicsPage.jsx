@@ -72,6 +72,15 @@ const SearchComicsPage = () => (
               <option value="unknown">Unknown</option>
             </select>
           </div>
+
+          <div className="form-group w-100" style={styles.submitBtnContainer}>
+            <div
+              className="btn btn-info btn-lg"
+              style={styles.submitBtn}
+            >
+              Go
+            </div>
+          </div>
         </div>
       </div>
     </form>
@@ -82,6 +91,13 @@ const styles = {
   input: {
     backgroundColor: '#212529',
     borderColor: '#212529',
+    color: '#fff',
+    marginBottom: 20,
+  },
+  submitBtnContainer: {
+    textAlign: 'right',
+  },
+  submitBtn: {
     color: '#fff',
   },
 }
