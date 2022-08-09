@@ -43,8 +43,24 @@ const HomePage = ({
 	}
 
 	const __renderHeaderTags = () => {
+		if (data === false) {
+			return <Helmet>
+				<title>{pageTitle}</title>
+				<meta name="title" content={pageTitle} />
+				<meta name="url" content={window.location.href} />
+			</Helmet>
+		}
+
+		const comic = data.results[11]
+		console.log(comic)
+		const img = comic.images[0]
+
 		return <Helmet>
 			<title>{pageTitle}</title>
+			<meta name="title" content={pageTitle} />
+			<meta name="url" content={window.location.href} />
+			<meta name="description" content={comic.description}/>
+			<meta name="image" content={img.path + img.extension} />
 		</Helmet>
 	}
 
