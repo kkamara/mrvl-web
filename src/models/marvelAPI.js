@@ -9,7 +9,7 @@ const {
 
 class MarvelAPI extends API {
     _headers = { Accept: 'application/json', }
-    _comics_filters = {
+    comics_filters = {
         format: {
             description: 'Filter by the issue format (e.g. comic, digital comic, hardcover).',
             type: 'string',
@@ -143,16 +143,16 @@ class MarvelAPI extends API {
      * @returns {bool}
      */
     acceptedKey(key, value) {
-        if (Object.keys(this._comics_filters).includes(key)) {
+        if (Object.keys(this.comics_filters).includes(key)) {
             if (
-                this._comics_filters[key].type === 'number' && 
+                this.comics_filters[key].type === 'number' && 
                 isNaN(parseInt(value))
             ) {
                 return false
             }
             if (
-                this._comics_filters.options &&
-                !this._comics_filters.options.includes(value)
+                this.comics_filters.options &&
+                !this.comics_filters.options.includes(value)
             ) {
                 return false
             }

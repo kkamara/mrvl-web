@@ -76,6 +76,10 @@ function isValidType(subject, typeToMatch) {
     return result
 }
 
+router.get('/comics/filters', async (req, res) => {
+    return res.send(JSON.stringify((new marvelAPI()).comics_filters))
+})
+
 router.get('/comics/search', async (req, res) => {
     const api = new marvelAPI()
     const filterOptions = Object.assign({}, api._comic_filters)
