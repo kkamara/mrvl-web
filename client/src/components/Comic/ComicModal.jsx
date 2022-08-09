@@ -145,7 +145,7 @@ function ComicModal({
               {comic.title}
             </Typography>
             <Typography variant='body2' color='text.secondary'>
-            <div dangerouslySetInnerHTML={ { __html: comic.description}} ></div>
+              <span dangerouslySetInnerHTML={ { __html: comic.description}} ></span>
             </Typography>
           </CardContent>
           <CardActions>
