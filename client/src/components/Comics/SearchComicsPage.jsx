@@ -594,7 +594,7 @@ const SearchComicsPage = ({
                 null}
               <label htmlFor="events">{comicsFiltersData.events && comicsFiltersData.events.description}</label>
               <input 
-                onChange={(e) => { setCharacters(e.target.value) }}
+                onChange={(e) => { setEvents(e.target.value) }}
                 style={styles.input}
                 className={`form-control ${searchComicsData && searchComicsData.error && searchComicsData.error.events ? isInvalidClass : ''}`}
                 name='events'
@@ -613,7 +613,7 @@ const SearchComicsPage = ({
                 null}
               <label htmlFor="stories">{comicsFiltersData.stories && comicsFiltersData.stories.description}</label>
               <input 
-                onChange={(e) => { setCharacters(e.target.value) }}
+                onChange={(e) => { setStories(e.target.value) }}
                 style={styles.input}
                 className={`form-control ${searchComicsData && searchComicsData.error && searchComicsData.error.stories ? isInvalidClass : ''}`}
                 name='stories'
@@ -632,7 +632,7 @@ const SearchComicsPage = ({
                 null}
               <label htmlFor="sharedAppearances">{comicsFiltersData.sharedAppearances && comicsFiltersData.sharedAppearances.description}</label>
               <input 
-                onChange={(e) => { setCharacters(e.target.value) }}
+                onChange={(e) => { setSharedAppearances(e.target.value) }}
                 style={styles.input}
                 className={`form-control ${searchComicsData && searchComicsData.error && searchComicsData.error.sharedAppearances ? isInvalidClass : ''}`}
                 name='sharedAppearances'
@@ -651,7 +651,7 @@ const SearchComicsPage = ({
                 null}
               <label htmlFor="collaborators">{comicsFiltersData.collaborators && comicsFiltersData.collaborators.description}</label>
               <input 
-                onChange={(e) => { setCharacters(e.target.value) }}
+                onChange={(e) => { setCollaborators(e.target.value) }}
                 style={styles.input}
                 className={`form-control ${searchComicsData && searchComicsData.error && searchComicsData.error.collaborators ? isInvalidClass : ''}`}
                 name='collaborators'
@@ -670,7 +670,7 @@ const SearchComicsPage = ({
                 null}
               <label htmlFor="orderBy">{comicsFiltersData.orderBy && comicsFiltersData.orderBy.description}</label>
               <input 
-                onChange={(e) => { setCharacters(e.target.value) }}
+                onChange={(e) => { setOrderBy(e.target.value) }}
                 style={styles.input}
                 className={`form-control ${searchComicsData && searchComicsData.error && searchComicsData.error.orderBy ? isInvalidClass : ''}`}
                 name='orderBy'
@@ -689,7 +689,7 @@ const SearchComicsPage = ({
                 null}
               <label htmlFor="limit">{comicsFiltersData.limit && comicsFiltersData.limit.description}</label>
               <input 
-                onChange={(e) => { setCharacters(e.target.value) }}
+                onChange={(e) => { setLimit(e.target.value) }}
                 style={styles.input}
                 className={`form-control ${searchComicsData && searchComicsData.error && searchComicsData.error.limit ? isInvalidClass : ''}`}
                 name='limit'
@@ -708,7 +708,7 @@ const SearchComicsPage = ({
                 null}
               <label htmlFor="offset">{comicsFiltersData.offset && comicsFiltersData.offset.description}</label>
               <input 
-                onChange={(e) => { setCharacters(e.target.value) }}
+                onChange={(e) => { setOffset(e.target.value) }}
                 style={styles.input}
                 className={`form-control ${searchComicsData && searchComicsData.error && searchComicsData.error.offset ? isInvalidClass : ''}`}
                 name='offset'
