@@ -109,7 +109,7 @@ router.get('/comics/search', async (req, res) => {
     await api.getComics(req.query)
         .then((payload) => {
             res.statusCode = 200
-            res.send(JSON.stringify({ data: payload.data }))
+            res.send(JSON.stringify({ data: payload.data.data }))
         })
         .catch(err => {
             console.log(err)

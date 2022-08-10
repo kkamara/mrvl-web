@@ -58,6 +58,39 @@ const SearchComicsPage = ({
 
 	useEffect(() => {
 		loadComicsFilters(paginationOffset)
+    if (false && paginationOffset !== 0) {
+      // search comics with filters from url        
+      const payload = {
+        format,
+        formatType,
+        noVariants,
+        dateDescriptor,
+        dateRange,
+        title,
+        titleStartsWith,
+        startYear,
+        issueNumber,
+        diamondCode,
+        digitalID,
+        upc,
+        isbn,
+        ean,
+        issn,
+        hasDigitalIssue,
+        modifiedSince,
+        creators,
+        characters,
+        series,
+        events,
+        stories,
+        sharedAppearances,
+        collaborators,
+        orderBy,
+        limit,
+        offset,
+      }
+      loadSearchComics(payload, offset)
+    }
 	}, [])
 
 	const loadComicsFilters = (paginationOffset) => {
@@ -106,7 +139,36 @@ const SearchComicsPage = ({
 	}
   
   const handleSearchPageFormSubmit = () => {
-
+    const payload = {
+      format,
+      formatType,
+      noVariants,
+      dateDescriptor,
+      dateRange,
+      title,
+      titleStartsWith,
+      startYear,
+      issueNumber,
+      diamondCode,
+      digitalID,
+      upc,
+      isbn,
+      ean,
+      issn,
+      hasDigitalIssue,
+      modifiedSince,
+      creators,
+      characters,
+      series,
+      events,
+      stories,
+      sharedAppearances,
+      collaborators,
+      orderBy,
+      limit,
+      offset,
+    }
+    loadSearchComics(payload, offset)
   }
 
   console.log('comicsFilters', comicsFilters)

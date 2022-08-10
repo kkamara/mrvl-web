@@ -4,7 +4,7 @@ import marvelService from "../../service/marvelService"
 export function getSearchComics(filters, offset) {
     return async dispatch => {
         dispatch(request(searchComicsActions.SEARCH_COMICS_PENDING))
-        await (new marvelService()).getComicsFilters({...filters, offset,})
+        await (new marvelService()).getSearchComics({...filters, offset,})
             .then(json => {
                 dispatch(
                     success(searchComicsActions.SEARCH_COMICS_SUCCESS, json.data.data)

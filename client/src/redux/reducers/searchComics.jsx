@@ -13,13 +13,13 @@ const searchComicsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 fetched: false,
-                loading: true,
+                loading: false,
                 error: action.payload
             }
         case searchComicsActions.SEARCH_COMICS_SUCCESS:
             return {
                 ...state,
-                fetched: false,
+                fetched: true,
                 loading: false,
                 data: action.payload
             }

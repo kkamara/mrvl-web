@@ -28,7 +28,7 @@ const Header = () => {
             </div>
             <nav className='container nav-container'>
                 <a className='btn btn-warning btn-lg' href='/'>Home</a>
-                {flags.search_page.enabled && flags.search_page.value === ENV ?
+                {flags.search_page.enabled ?
                     <a className='btn btn-warning btn-lg' href='/search'>Search</a> :
                     null}
                 <a className='btn btn-warning btn-lg' href='/favs'>Favourites</a>
