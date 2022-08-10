@@ -1,9 +1,11 @@
 import { searchComicsActions, } from "./types"
 
 const initialState = {
-    data: false
+    data: false,
+    fetched: false,
+    loading: false,
 }
-const searchComicReducer = (state = initialState, action) => {
+const searchComicsReducer = (state = initialState, action) => {
     switch (action.type) {
         case searchComicsActions.SEARCH_COMICS_PENDING:
             return { ...state, fetched: false, loading: false }
@@ -26,4 +28,4 @@ const searchComicReducer = (state = initialState, action) => {
     return state
 }
 
-export default searchComicReducer
+export default searchComicsReducer

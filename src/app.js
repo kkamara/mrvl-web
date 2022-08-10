@@ -77,7 +77,7 @@ function isValidType(subject, typeToMatch) {
 }
 
 router.get('/comics/filters', async (req, res) => {
-    return res.send(JSON.stringify((new marvelAPI()).comics_filters))
+    return res.send(JSON.stringify({data: (new marvelAPI()).comics_filters}))
 })
 
 router.get('/comics/search', async (req, res) => {

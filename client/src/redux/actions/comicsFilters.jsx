@@ -1,17 +1,17 @@
-import { searchComicsActions, } from "../reducers/types"
+import { comicsFiltersActions, } from "../reducers/types"
 import marvelService from "../../service/marvelService"
 
-export function getSearchComics(filters, offset) {
+export function getComicsFilters() {
     return async dispatch => {
-        dispatch(request(searchComicsActions.SEARCH_COMICS_PENDING))
-        await (new marvelService()).getComicsFilters({...filters, offset,})
+        dispatch(request(comicsFiltersActions.GET_COMICS_FILTERS_PENDING))
+        await (new marvelService()).getComicsFilters()
             .then(json => {
                 dispatch(
-                    success(searchComicsActions.SEARCH_COMICS_SUCCESS, json.data.data)
+                    success(comicsFiltersActions.GET_COMICS_FILTERS_SUCCESS, json.data.data)
                 )
             })
             .catch(err => {
-                dispatch(error(searchComicsActions.SEARCH_COMICS_ERROR, err))
+                dispatch(error(comicsFiltersActions.GET_COMICS_FILTERS_ERROR, err))
             })
 
         function request(type) {

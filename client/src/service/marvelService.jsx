@@ -14,7 +14,7 @@ export default class MarvelService{
     }
 
     /**
-     * Return characters api response   
+     * Return comics api response   
      * @param {obj} queryParams
      * @returns {Promise}
      */
@@ -38,13 +38,37 @@ export default class MarvelService{
     }
 
     /**
-     * Return characters api response   
+     * Return comic api response   
      * @param {string} id
      * @returns {Promise}
      */
     getComic(id) {
         /** @var {string} endpoint */
         const endpoint = new URL(`${this._url}/comics/${id}`)
+        return axios.get(endpoint.href, { headers: this._headers,})
+    }
+
+    /**
+     * Return comics filters api response
+     * @param {obj} queryParams
+     * @returns {Promise}
+     */
+    getComicsFilters(queryParams) {
+        /** @var {string} endpoint */
+        const endpoint = new URL(`${this._url}/comics/filters`)
+        if (
+            queryParams !== null &&
+            typeof queryParams === 'object' &&
+            Object.keys(queryParams).length
+        ) {
+            for(const key in queryParams) {
+                const val = queryParams[key]
+                if (val === null) {
+                    continue
+                }
+                endpoint.searchParams.append(key, val)
+            }
+        }
         return axios.get(endpoint.href, { headers: this._headers,})
     }
 }
