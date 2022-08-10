@@ -1,12 +1,18 @@
-import React, { useEffect, } from 'react'
+import React, { useEffect, useState, } from 'react'
 import { connect } from 'react-redux'
 import { Helmet, } from "react-helmet"
 
 import { useQuery, } from '../../utilities/methods'
 import { APP_NAME, } from "../../constants"
+import Comic from '../Comic'
+import SimplePagination from "../Pagination/SimplePagination"
 
 import { getComicsFilters, } from "../../redux/actions/comicsFilters"
 import { getSearchComics, } from "../../redux/actions/searchComics"
+import Loader from "../Loader"
+
+const isValidClass = 'is-valid'
+const isInvalidClass = 'is-invalid'
 
 const SearchComicsPage = ({
   getComicsFilters,
@@ -15,40 +21,128 @@ const SearchComicsPage = ({
   searchComics,
 }) => {
 	const query = useQuery()
-	let offset = 0
+	let paginationOffset = 0
 
 	let queryOffset = query.get('offset')
 	if (queryOffset && !isNaN(parseInt(queryOffset))) {
-			offset = parseInt(queryOffset)
+    paginationOffset = parseInt(queryOffset)
 	}
+
+  const [format, setFormat] = useState('')
+  const [formatType, setFormatType] = useState('')
+  const [noVariants, setNoVariants] = useState('')
+  const [dateDescriptor, setDateDescriptor] = useState('')
+  const [dateRange, setDateRange] = useState('')
+  const [title, settitle] = useState('')
+  const [titleStartsWith, setTitleStartsWith] = useState('')
+  const [startYear, setStartYear] = useState('')
+  const [diamondCode, setDiamondCode] = useState('')
+  const [digitalID, setDigitalID] = useState('')
+  const [upc, setUpc] = useState('')
+  const [isbn, setIsbn] = useState('')
+  const [ean, setEan] = useState('')
+  const [issn, setIssn] = useState('')
+  const [hasDigitalIssue, setHasDigitalIssue] = useState('')
+  const [modifiedSince, setModifiedSince] = useState('')
+  const [creators, setCreators] = useState('')
+  const [characters, setCharacters] = useState('')
+  const [series, setSeries] = useState('')
+  const [events, setEvents] = useState('')
+  const [stories, setStories] = useState('')
+  const [sharedAppearances, setSharedAppearances] = useState('')
+  const [collaborators, setCollaborators] = useState('')
+  const [orderBy, setOrderBy] = useState('')
+  const [limit, setLimit] = useState('')
+  const [offset, setOffset] = useState('')
 
 	useEffect(() => {
-		loadComicsFilters(offset)
+		loadComicsFilters(paginationOffset)
 	}, [])
 
-	const loadComicsFilters = (offset) => {
-		getComicsFilters(offset)
+	const loadComicsFilters = (paginationOffset) => {
+		getComicsFilters(paginationOffset)
 	}
 
-	const loadSearchComics = (filters, offset) => {
-		getSearchComics(filters, offset)
+	const loadSearchComics = (filters, paginationOffset) => {
+		getSearchComics(filters, paginationOffset)
 	}
 
-	// const {
-  //   data: comicsFiltersData,
-  //   fetched: comicsFiltersFetched,
-  //   loading: comicsFiltersLoading,
-  // } = comicsFilters
-	// const {
-  //   data: searchComicsData,
-  //   fetched: searchComicsFetched,
-  //   loading: searchComicsLoading,
-  // } = searchComics
-	const pageTitle = `Home | ${APP_NAME}`
+	const {
+    data: comicsFiltersData,
+    fetched: comicsFiltersFetched,
+    loading: comicsFiltersLoading,
+  } = comicsFilters
+	const {
+    data: searchComicsData,
+    fetched: searchComicsFetched,
+    loading: searchComicsLoading,
+  } = searchComics
+	const pageTitle = `Search Page | ${APP_NAME}`
+
+	const __renderHeaderTags = () => {
+    return <Helmet>
+      <title>{pageTitle}</title>
+      <meta name="title" content={pageTitle} />
+      <meta name="url" content={window.location.href} />
+    </Helmet>
+	}
+
+	const __renderComics = () => {
+		if (
+			!searchComicsData ||
+			!(
+				(typeof searchComicsData === 'object' && searchComicsData !== null) &&
+				searchComicsData.results !== undefined
+			) ||
+			!searchComicsData.results.length
+		) {
+			return <p>No results to display your query.</p>
+		}
+		
+		return searchComicsData.results.map((comic, key) =>
+			<Comic key={key} comic={comic}/>
+		)
+	}
+  
+  const handleSearchPageFormSubmit = () => {
+
+  }
 
   console.log('comicsFilters', comicsFilters)
+  console.log('searchComics', searchComics)
 
-  return (
+	if (!comicsFiltersData && !comicsFiltersFetched && !comicsFiltersLoading) {
+    return <Loader />
+  } else if (!searchComicsFetched && searchComicsLoading) {
+		return <Loader />
+	}
+
+	let content = null
+
+	if (!searchComicsData && !searchComicsFetched && !searchComicsLoading) {
+    content = null
+  } else if (searchComicsFetched && !searchComicsLoading) {
+		content = (
+			<div className="container text-center">
+				<div className="content-header">
+					<SimplePagination data={searchComicsData} />
+				</div>
+				{__renderComics()}
+				<div className="content-footer">
+					<SimplePagination data={searchComicsData} />
+				</div>
+			</div>
+		)
+	} else if (!searchComicsFetched && searchComicsLoading) {
+		content = <Loader />
+	} else {
+		content = <div className="container">
+			<div>Unknown error encountered</div>
+		</div>
+	}
+
+  return <>
+    {__renderHeaderTags()}
     <div className="container">
       <form
         className="card bg-dark"
@@ -59,13 +153,15 @@ const SearchComicsPage = ({
         <div className="card-body bg-dark">
           <div className="card-text bg-dark">
             <div className="form-group">
+              {/* comicsFiltersData */}
+              <span className='btn btn-danger'>error has occurred.</span>
               <input
-                onChange={() => {}}
-                name='name'
+                onChange={(e) => { setFormat(e.target.value) }}
+                name='format'
                 type="text"
-                className="form-control"
-                placeholder='Name'
-                // value={name}
+                className={`form-control ${isInvalidClass}`}
+                placeholder='Format'
+                value={format}
                 style={styles.input}
               />
             </div>
@@ -73,7 +169,7 @@ const SearchComicsPage = ({
               <select
                 onChange={() => {}}
                 name="status"
-                className="form-control"
+                className={`form-control ${isValidClass}`}
                 // value={status}
                 style={styles.input}
               >
@@ -125,6 +221,7 @@ const SearchComicsPage = ({
               <div
                 className="btn btn-info btn-lg"
                 style={styles.submitBtn}
+                onClick={handleSearchPageFormSubmit}
               >
                 Go
               </div>
@@ -133,7 +230,8 @@ const SearchComicsPage = ({
         </div>
       </form>
     </div>
-  )
+    {content}
+  </>
 }
 
 const styles = {

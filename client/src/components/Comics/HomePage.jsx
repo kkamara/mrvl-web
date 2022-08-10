@@ -52,7 +52,6 @@ const HomePage = ({
 		}
 
 		const comic = data.results[11]
-		console.log(comic)
 		const img = comic.images[0]
 
 		return <Helmet>
