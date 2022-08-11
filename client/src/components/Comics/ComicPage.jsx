@@ -3,12 +3,17 @@ import { connect, } from "react-redux"
 import { Helmet, } from "react-helmet"
 
 import { getComic, } from "../../redux/actions/singleComic"
+import { getFavComics, } from "../../redux/actions/comic"
 import Comic from '../Comic'
 
 import Loader from "../Loader"
 import { APP_NAME, } from "../../constants"
 
-const ComicPage = ({ getComic, singleComic: comic, }) => {
+const ComicPage = ({ 
+	getFavComics,
+	getComic, 
+	singleComic: comic, 
+}) => {
 
 	const { comic: data, fetched, loading, } = comic
 	const pathname = window.location.pathname
@@ -17,10 +22,15 @@ const ComicPage = ({ getComic, singleComic: comic, }) => {
 	
 	useEffect(() => {
 		loadComic(id)
+		loadFavComics()
 	}, [])
 
 	const loadComic = (id) => {
 		getComic(id)
+	}
+
+	const loadFavComics = () => {
+		getFavComics()
 	}
 
 	const __renderHeaderTags = () => {
@@ -31,7 +41,7 @@ const ComicPage = ({ getComic, singleComic: comic, }) => {
 				<meta name="url" content={window.location.href} />
 			</Helmet>
 		}
-		console.log(id, data)
+		console.log(data)
 		const img = data.images[0]
 
 		return <Helmet>
@@ -72,6 +82,7 @@ const mapStateToProps = state => ({
 	singleComic: state.singleComic,
 })
 const mapDispatchToProps = dispatch => ({
+	getFavComics: () => dispatch(getFavComics()),
 	getComic: id => dispatch(getComic(id)),
 })
 

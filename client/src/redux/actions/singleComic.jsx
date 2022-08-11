@@ -4,7 +4,7 @@ import marvelService from "../../service/marvelService"
 export function getComic(id) {
     return async dispatch => {
         dispatch(request(comicActions.GET_COMIC_PENDING))
-console.log(id)
+        
         await (new marvelService()).getComic(id)
             .then(json => {
                 dispatch(
