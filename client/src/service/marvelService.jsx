@@ -87,7 +87,7 @@ export default class MarvelService{
         ) {
             for(const key in queryParams) {
                 const val = queryParams[key]
-                if (val === null || !val.length) {
+                if (val === null || (typeof val === 'string' && !val.length) || val === 0) {
                     continue
                 }
                 endpoint.searchParams.append(key, val)

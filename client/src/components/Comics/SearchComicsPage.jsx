@@ -33,7 +33,7 @@ const SearchComicsPage = ({
   const [noVariants, setNoVariants] = useState(false)
   const [dateDescriptor, setDateDescriptor] = useState('')
   const [dateRange, setDateRange] = useState('')
-  const [title, settitle] = useState('')
+  const [title, setTitle] = useState('')
   const [titleStartsWith, setTitleStartsWith] = useState('')
   const [startYear, setStartYear] = useState('')
   const [issueNumber, setIssueNumber] = useState('')
@@ -57,39 +57,50 @@ const SearchComicsPage = ({
   const [offset, setOffset] = useState('')
 
 	useEffect(() => {
-		loadComicsFilters(paginationOffset)
-    if (false && paginationOffset !== 0) {
-      // search comics with filters from url        
-      const payload = {
-        format,
-        formatType,
-        noVariants,
-        dateDescriptor,
-        dateRange,
-        title,
-        titleStartsWith,
-        startYear,
-        issueNumber,
-        diamondCode,
-        digitalID,
-        upc,
-        isbn,
-        ean,
-        issn,
-        hasDigitalIssue,
-        modifiedSince,
-        creators,
-        characters,
-        series,
-        events,
-        stories,
-        sharedAppearances,
-        collaborators,
-        orderBy,
-        limit,
-        offset,
+		loadComicsFilters(paginationOffset)   
+    const payload = {
+      format: query.get('format'),
+      formatType: query.get('formatType'),
+      noVariants: query.get('noVariants'),
+      dateDescriptor: query.get('dateDescriptor'),
+      dateRange: query.get('dateRange'),
+      title: query.get('title'),
+      titleStartsWith: query.get('titleStartsWith'),
+      startYear: query.get('startYear'),
+      issueNumber: query.get('issueNumber'),
+      diamondCode: query.get('diamondCode'),
+      digitalID: query.get('digitalID'),
+      upc: query.get('upc'),
+      isbn: query.get('isbn'),
+      ean: query.get('ean'),
+      issn: query.get('issn'),
+      hasDigitalIssue: query.get('hasDigitalIssue'),
+      modifiedSince: query.get('modifiedSince'),
+      creators: query.get('creators'),
+      characters: query.get('characters'),
+      series: query.get('series'),
+      events: query.get('events'),
+      stories: query.get('stories'),
+      sharedAppearances: query.get('sharedAppearances'),
+      collaborators: query.get('collaborators'),
+      orderBy: query.get('orderBy'),
+      limit: query.get('limit'),
+      offset: paginationOffset,
+    }
+    let urlParamExists = false
+    for(const key in payload) {
+      const val = payload[key]
+      if (val === null) {
+        delete payload[key]
+      } else {
+        urlParamExists = true
+        const setFunc = 'set' + key[0].toUpperCase() + key.slice(1) + '(' + `'${val}'` + ')'
+        eval(setFunc)
       }
-      loadSearchComics(payload, offset)
+    }
+    if (urlParamExists) {
+      // search comics with filters from url  
+      loadSearchComics(payload, payload.offset)
     }
 	}, [])
 
@@ -171,9 +182,6 @@ const SearchComicsPage = ({
     loadSearchComics(payload, offset)
   }
 
-  console.log('comicsFilters', comicsFilters)
-  console.log('searchComics', searchComics)
-
 	if (!comicsFiltersData && !comicsFiltersFetched && !comicsFiltersLoading) {
     return <Loader />
   } else if (!searchComicsFetched && searchComicsLoading) {
@@ -211,7 +219,7 @@ const SearchComicsPage = ({
         className="card bg-dark"
         action=''
         method='GET'
-        onSubmit={() => {}}
+        onSubmit={handleSearchPageFormSubmit}
       >
         <div className="card-body bg-dark">
           <div className="card-text bg-dark">
@@ -248,7 +256,7 @@ const SearchComicsPage = ({
                 </> :
                 null}
               <select
-                onChange={(e) => { setFormat(e.target.value) }}
+                onChange={(e) => { setFormatType(e.target.value) }}
                 name='formatType'
                 type="text"
                 className={`form-control ${searchComicsData && searchComicsData.error && searchComicsData.error.formatType ? isInvalidClass : ''}`}
@@ -330,7 +338,7 @@ const SearchComicsPage = ({
                 null}
               <label htmlFor="title">{comicsFiltersData.title && comicsFiltersData.title.description}</label>
               <input 
-                onChange={(e) => { settitle(e.target.value) }}
+                onChange={(e) => { setTitle(e.target.value) }}
                 style={styles.input}
                 className={`form-control ${searchComicsData && searchComicsData.error && searchComicsData.error.title ? isInvalidClass : ''}`}
                 name='title'
@@ -522,7 +530,7 @@ const SearchComicsPage = ({
                 type="checkbox" 
                 name="hasDigitalIssue" 
                 className={`${searchComicsData && searchComicsData.error && searchComicsData.error.hasDigitalIssue ? isInvalidClass : ''}`}
-                onChange={evt => { setNoVariants(evt.target.checked) }}
+                onChange={evt => { setHasDigitalIssue(evt.target.checked) }}
               />
             </div>
             <div className="form-group">
@@ -543,6 +551,25 @@ const SearchComicsPage = ({
                 placeholder='Date modified since'
                 type='date'
                 value={modifiedSince}
+              />
+            </div>
+            <div className="form-group">
+              {searchComicsData && searchComicsData.error && searchComicsData.error.creators ?
+                <>
+                  <hr /> 
+                  <p>
+                    <span className='btn btn-danger'>{searchComicsData.error.creators}</span> :
+                  </p>
+                </> :
+                null}
+              <label htmlFor="creators">{comicsFiltersData.creators && comicsFiltersData.creators.description}</label>
+              <input 
+                onChange={(e) => { setCreators(e.target.value) }}
+                style={styles.input}
+                className={`form-control ${searchComicsData && searchComicsData.error && searchComicsData.error.creators ? isInvalidClass : ''}`}
+                name='creators'
+                placeholder='creators'
+                value={creators}
               />
             </div>
             <div className="form-group">
@@ -718,13 +745,12 @@ const SearchComicsPage = ({
             </div>
 
             <div className="form-group w-100" style={styles.submitBtnContainer}>
-              <div
+              <input
                 className="btn btn-info btn-lg"
                 style={styles.submitBtn}
-                onClick={handleSearchPageFormSubmit}
-              >
-                Go
-              </div>
+                type='submit'
+                value='Go'
+              />
             </div>
           </div>
         </div>

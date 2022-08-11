@@ -10,13 +10,13 @@ const SimplePagination = ({ data }) => {
     if (queryOffset && !isNaN(parseInt(queryOffset))) {
         offset = parseInt(queryOffset)
     }
-
+    
     let disableLeftPaginator = false,
         disableRightPaginator = false
     if (offset < 1) {
         disableLeftPaginator = true
     }
-    if (offset > (data.total + offset)) {
+    if (data.count < data.limit) {
         disableRightPaginator = true
     }
 
@@ -27,24 +27,41 @@ const SimplePagination = ({ data }) => {
         data.filters.length
     ) uriEncodedFilters += `&${data.filters}`
 
+    const prevOffset = offset - 20
+    const nextOffset = offset + 20
+
+    const prevOffsetURL = new URL(window.location.href)
+    if (null !== prevOffsetURL.searchParams.get('offset')) {
+        prevOffsetURL.searchParams.set('offset', prevOffset)
+    } else {
+        prevOffsetURL.searchParams.append('offset', prevOffset)
+    }
+
+    const nextOffsetURL = new URL(window.location.href)
+    if (null !== nextOffsetURL.searchParams.get('offset')) {
+        nextOffsetURL.searchParams.set('offset', nextOffset)
+    } else {
+        nextOffsetURL.searchParams.append('offset', nextOffset)
+    }
+
     const leftPaginateBtnClick = e => {
         if (disableLeftPaginator) return
-        window.location.href = `${window.location.origin}${window.location.pathname}?offset=${offset - 20}${uriEncodedFilters}`
+        window.location.href = prevOffsetURL.href
     }
 
     const rightPaginateBtnClick = e => {
         if (disableRightPaginator) return
-        window.location.href = `${window.location.origin}${window.location.pathname}?offset=${offset + 20}${uriEncodedFilters}`
+        window.location.href = nextOffsetURL.href
     }
     
     return <>
         <nav aria-label='Comic pagination'>
             <ul className='pagination justify-content-center'>
                 <li onClick={leftPaginateBtnClick} className={`page-item ${disableLeftPaginator ? 'disabled' : ''}`}>
-                    <a className='page-link' href='#'>Previous</a>
+                    <a className='page-link' href={prevOffsetURL.href}>Previous</a>
                 </li>
                 <li onClick={rightPaginateBtnClick} className={`page-item ${disableRightPaginator ? 'disabled' : ''}`}>
-                    <a className='page-link' href='#'>Next</a>
+                    <a className='page-link' href={nextOffsetURL.href}>Next</a>
                 </li>
             </ul>
         </nav>
