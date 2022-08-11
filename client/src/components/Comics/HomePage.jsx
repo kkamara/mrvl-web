@@ -59,7 +59,9 @@ const HomePage = ({
 			<meta name="title" content={pageTitle} />
 			<meta name="url" content={window.location.href} />
 			<meta name="description" content={comic.description}/>
-			<meta name="image" content={img.path + img.extension} />
+			{img ?
+				<meta name="image" content={img.path + img.extension} /> :
+				null}
 		</Helmet>
 	}
 

@@ -45,10 +45,7 @@ function ComicModal({
   const handleLinkClickOperation = () => {
     const domain = new URL(window.location.href)
     const url = domain.origin + '/comic/' + comic.id
-    navigator.clipboard.writeText(url)
-    const msg = url + ' has been successfully copied to clipboard.'
-    console.log(msg)
-    alert(msg)
+    window.location.href = url
   }
 
   const handleFavouriteComicClick = () => {
@@ -172,7 +169,7 @@ function ComicModal({
                 className='btn btn-primary close-modal-btn copy-link-btn'
 	              style={{ ...styles.linkBtn, ...styles.copyLinkBtn }}
               >
-                Copy Link
+                Comic Page
               </a> :
             null}
           </CardActions>
