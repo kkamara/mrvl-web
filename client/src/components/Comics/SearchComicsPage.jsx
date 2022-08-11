@@ -94,8 +94,14 @@ const SearchComicsPage = ({
         delete payload[key]
       } else {
         urlParamExists = true
-        const setFunc = 'set' + key[0].toUpperCase() + key.slice(1) + '(' + `'${val}'` + ')'
-        eval(setFunc)
+        if (key === 'noVariants' && val == 'true') {
+          setNoVariants(true)
+        } if (key === 'hasDigitalIssue' && val == 'true') {
+          setHasDigitalIssue(true)
+        } else {
+          const setFunc = 'set' + key[0].toUpperCase() + key.slice(1) + '(' + `'${val}'` + ')'
+          eval(setFunc)
+        }
       }
     }
     if (urlParamExists) {
@@ -189,7 +195,6 @@ const SearchComicsPage = ({
 	}
 
 	let content = null
-
 	if (!searchComicsData && !searchComicsFetched && !searchComicsLoading) {
     content = null
   } else if (searchComicsFetched && !searchComicsLoading) {
@@ -283,6 +288,7 @@ const SearchComicsPage = ({
                 name="noVariants" 
                 className={`${searchComicsData && searchComicsData.error && searchComicsData.error.noVariants ? isInvalidClass : ''}`}
                 onChange={evt => { setNoVariants(evt.target.checked) }}
+                value={noVariants}
               />
             </div>
             <div className="form-group">
@@ -531,6 +537,7 @@ const SearchComicsPage = ({
                 name="hasDigitalIssue" 
                 className={`${searchComicsData && searchComicsData.error && searchComicsData.error.hasDigitalIssue ? isInvalidClass : ''}`}
                 onChange={evt => { setHasDigitalIssue(evt.target.checked) }}
+                value={hasDigitalIssue}
               />
             </div>
             <div className="form-group">
