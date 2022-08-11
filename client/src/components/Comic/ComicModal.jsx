@@ -163,7 +163,7 @@ function ComicModal({
             >
               Close
             </a>
-            {flags.copy_link_feature.enabled && flags.copy_link_feature.value === ENV ?
+            {flags.copy_link_feature.enabled ?
               <a 
                 onClick={handleLinkClickOperation} 
                 className='btn btn-primary close-modal-btn copy-link-btn'
