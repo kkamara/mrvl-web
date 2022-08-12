@@ -220,7 +220,7 @@ const SearchComicsPage = ({
 			<div>Unknown error encountered</div>
 		</div>
 	}
-console.log('title',title)
+  
   return <>
     {__renderHeaderTags()}
     <div className="container">

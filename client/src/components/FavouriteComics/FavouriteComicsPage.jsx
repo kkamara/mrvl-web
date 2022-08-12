@@ -27,7 +27,7 @@ const FavouriteComicsPage = ({ getFavComics, comic, }) => {
 	}
 	
 	const __renderFavComics = () => {
-		if (!favComics.ids.length) {
+		if (!favComics.ids.length || !favComics.items.length) {
 			return <p>No results to display your query.</p>
 		}
 		

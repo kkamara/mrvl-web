@@ -41,7 +41,7 @@ const ComicPage = ({
 				<meta name="url" content={window.location.href} />
 			</Helmet>
 		}
-		console.log(data)
+		
 		const img = data.images[0]
 
 		return <Helmet>

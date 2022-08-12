@@ -5,6 +5,7 @@ const {
     publicMarvelKey,
     privateMarvelKey,
     marvelURL,
+    apiURL,
 } = require('../config')
 
 class MarvelAPI extends API {
@@ -168,6 +169,22 @@ class MarvelAPI extends API {
         const results = { apiKey: publicMarvelKey, ts: (new Date()).getTime(), }
         results.hash = md5(results.ts+privateMarvelKey+publicMarvelKey)
         return results
+    }
+
+    /**
+     * Return searchable paginated characters api response
+     * @param {array} ids
+     * @return {Promise}
+     */
+    async getFavComics(ids) {
+        const comics = []
+        for (const id of ids) {
+            try {
+                const comic = await axios.get(`${apiURL}/api/v1/comics/${id}`)
+                comics.push(comic.data.data)
+            } catch (err) {}
+        }
+        return comics
     }
 
     /**

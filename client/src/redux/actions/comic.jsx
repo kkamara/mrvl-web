@@ -123,7 +123,7 @@ export function getFavComics(fetchFavItems=false) {
         if (fetchFavItems) {
             await (new marvelService()).getFavComics(favComics)
                 .then(json => {
-                    result.push(json.data.data)
+                    result = json.data.data
                 })
                 .catch(err => {
                     return dispatch(error(comicActions.GET_FAVOURITE_COMICS_ERROR, err.message))

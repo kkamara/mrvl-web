@@ -76,6 +76,24 @@ function isValidType(subject, typeToMatch) {
     return result
 }
 
+router.get('/comics/favs', async (req, res) => {
+    let comics = req.query['comics']
+    if (!comics) {
+        return res.send(JSON.stringify({data: []}))
+    }
+    comics = comics.split(',')
+    for (const id of comics) {
+        if (isNaN(Number.parseInt(id.trim()))) {
+            res.statusCode = 400
+            return res.send('Comics query param must be a comma-delimited string of comic ids')
+        }
+    }
+    for (const key in comics) {
+        comics[key] = comics[key].trim()
+    }
+    return res.send(JSON.stringify({data: await (new marvelAPI()).getFavComics(comics)}))
+})
+
 router.get('/comics/filters', async (req, res) => {
     return res.send(JSON.stringify({data: (new marvelAPI()).comics_filters}))
 })
