@@ -177,13 +177,23 @@ class MarvelAPI extends API {
      * @return {Promise}
      */
     async getFavComics(ids) {
-        const comics = []
+        const promises = []
+        let comics = []
+
         for (const id of ids) {
-            try {
+            promises.push(new Promise(async resolve => {
                 const comic = await axios.get(`${apiURL}/api/v1/comics/${id}`)
-                comics.push(comic.data.data)
-            } catch (err) {}
+                resolve(comic.data.data)
+            }))
         }
+        
+        await new Promise((resolve, reject) => {
+            Promise.all(promises).then(data => {
+                    comics = data
+                    resolve()
+                })
+                .catch(err => { throw err })
+        })
         return comics
     }
 
