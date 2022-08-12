@@ -33,6 +33,9 @@ function ComicModal({
   const flags = useFlags(['copy_link_feature'],)
 
   const [open, setOpen] = useState(false)
+
+  const domain = new URL(window.location.href)
+  const copyPageURL = domain.origin + '/comic/' + comic.id
 	
   const handleOpenModalOperation = () => {
     setOpen(true)
@@ -40,12 +43,6 @@ function ComicModal({
 
   const handleCloseModalOperation = () => {
     setOpen(false)
-  }
-
-  const handleLinkClickOperation = () => {
-    const domain = new URL(window.location.href)
-    const url = domain.origin + '/comic/' + comic.id
-    window.location.href = url
   }
 
   const handleFavouriteComicClick = () => {
@@ -165,7 +162,7 @@ function ComicModal({
             </a>
             {flags.copy_link_feature.enabled ?
               <a 
-                onClick={handleLinkClickOperation} 
+                href={copyPageURL} 
                 className='btn btn-primary close-modal-btn copy-link-btn'
 	              style={{ ...styles.linkBtn, ...styles.copyLinkBtn }}
               >
