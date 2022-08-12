@@ -121,19 +121,13 @@ export function getFavComics(fetchFavItems=false) {
         let result = []
         
         if (fetchFavItems) {
-            for (const id of favComics) {
-                try {
-                    await (new marvelService()).getComic(id)
-                        .then(json => {
-                            result.push(json.data.data)
-                        })
-                        .catch(err => {
-                            throw err
-                        })
-                } catch(err) {
+            await (new marvelService()).getFavComics(favComics)
+                .then(json => {
+                    result.push(json.data.data)
+                })
+                .catch(err => {
                     return dispatch(error(comicActions.GET_FAVOURITE_COMICS_ERROR, err.message))
-                }
-            }
+                })
         }
 
         dispatch(

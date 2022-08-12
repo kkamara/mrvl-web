@@ -166,7 +166,7 @@ function ComicModal({
                 className='btn btn-primary close-modal-btn copy-link-btn'
 	              style={{ ...styles.linkBtn, ...styles.copyLinkBtn }}
               >
-                Comic Page
+                Comic page
               </a> :
             null}
           </CardActions>
