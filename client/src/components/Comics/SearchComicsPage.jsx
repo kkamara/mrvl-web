@@ -142,6 +142,20 @@ const SearchComicsPage = ({
     </Helmet>
 	}
 
+  let comicsComponents = null
+  if (
+    !(!searchComicsData ||
+    !(
+      (typeof searchComicsData === 'object' && searchComicsData !== null) &&
+      searchComicsData.results !== undefined
+    ) ||
+    !searchComicsData.results.length)
+  ) {
+    comicsComponents = searchComicsData.results.map((comic, key) =>
+      <Comic key={key} comic={comic}/>
+    )
+  }
+
 	const __renderComics = () => {
 		if (
 			!searchComicsData ||
@@ -153,10 +167,8 @@ const SearchComicsPage = ({
 		) {
 			return <p>No results to display your query.</p>
 		}
-		
-		return searchComicsData.results.map((comic, key) =>
-			<Comic key={key} comic={comic}/>
-		)
+    
+		return comicsComponents
 	}
   
   const handleSearchPageFormSubmit = () => {
