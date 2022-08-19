@@ -1,6 +1,11 @@
-import React, { useEffect, } from "react"
+import React, { 
+	useState, 
+	useEffect, 
+	useCallback,
+} from "react"
 import { connect, } from "react-redux"
 import { Helmet, } from "react-helmet"
+import ComicService from '../../service/comicService'
 
 import { getComics, } from "../../redux/actions/comics"
 import { getFavComics, } from "../../redux/actions/comic"
@@ -12,6 +17,8 @@ import Loader from "../Loader"
 import { APP_NAME, } from "../../constants"
 
 import './HomePage.scss'
+
+const comicService = new ComicService
 
 const HomePage = ({ 
 	comics, 
@@ -28,6 +35,8 @@ const HomePage = ({
 
 	const { data, fetched, loading, } = comics
 	const pageTitle = `Home | ${APP_NAME}`
+
+	const [isOpenStatesPerComic, setisOpenStatesPerComic] = useState(null)
 
 	useEffect(() => {
 		loadComics(offset)
@@ -65,21 +74,49 @@ const HomePage = ({
 		</Helmet>
 	}
 
+	const dataHasLoaded = !(!data ||
+		!(
+			(typeof data === 'object' && data !== null) &&
+			data.results !== undefined
+		) ||
+		!data.results.length)
+
 	const __renderComics = () => {
-		if (
-			!data ||
-			!(
-				(typeof data === 'object' && data !== null) &&
-				data.results !== undefined
-			) ||
-			!data.results.length
-		) {
+		if (!dataHasLoaded) {
 			return <p>No results to display your query.</p>
 		}
-		
-		return data.results.map((comic, key) =>
-			<Comic key={key} comic={comic}/>
-		)
+
+		return data.results.map((comic, key) => {
+			return <Comic 
+				key={key} 
+				comic={comic}
+				disablePrevPaginator={comicService.shouldDisableLeftPaginator(key, data.results)}
+				disableNextPaginator={comicService.shouldDisableRightPaginator(key, data.results)}
+				openDefaultValue={isOpenStatesPerComic && isOpenStatesPerComic.length ? isOpenStatesPerComic[key] : false}
+				openNextComic={() => { 
+					setisOpenStatesPerComic(isOpenStatesPerComic => {
+						const isOpenStatesPerComicNew = []
+						data.results.forEach((_, k) => {
+							isOpenStatesPerComicNew[k] = false
+						})
+						isOpenStatesPerComicNew[key] = false; 
+						isOpenStatesPerComicNew[key + 1] = true; 
+						return isOpenStatesPerComicNew
+					})
+				}}
+				openPrevComic={() => { 
+					setisOpenStatesPerComic(isOpenStatesPerComic => {
+						const isOpenStatesPerComicNew = []
+						data.results.forEach((_, k) => {
+							isOpenStatesPerComicNew[k] = false
+						})
+						isOpenStatesPerComicNew[key] = false; 
+						isOpenStatesPerComicNew[key - 1] = true; 
+						return isOpenStatesPerComicNew				
+					})
+				}}
+			/>
+		})
 	}
 
 	let content = null

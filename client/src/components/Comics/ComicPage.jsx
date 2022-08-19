@@ -61,7 +61,11 @@ const ComicPage = ({
 		pageTitle = data.title + pageTitle
 		content = (
 			<div className="container text-center">
-				<Comic comic={data}/>
+				<Comic 
+					comic={data}
+					disabledPrevPaginator
+					disabledNextPaginator
+				/>
 			</div>
 		)
 	} else if (!fetched && loading) {

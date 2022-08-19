@@ -1,6 +1,7 @@
 import React, { useEffect, useState, } from 'react'
 import { connect } from 'react-redux'
 import { Helmet, } from "react-helmet"
+import ComicService from '../../service/comicService'
 
 import { useQuery, } from '../../utilities/methods'
 import { APP_NAME, } from "../../constants"
@@ -13,6 +14,8 @@ import Loader from "../Loader"
 
 const isValidClass = 'is-valid'
 const isInvalidClass = 'is-invalid'
+
+const comicService = new ComicService
 
 const SearchComicsPage = ({
   getComicsFilters,
@@ -27,6 +30,8 @@ const SearchComicsPage = ({
 	if (queryOffset && !isNaN(parseInt(queryOffset))) {
     paginationOffset = parseInt(queryOffset)
 	}
+
+	const [isOpenStatesPerComic, setisOpenStatesPerComic] = useState(null)
 
   const [hideFields, setHideFields] = useState(false)
   const [format, setFormat] = useState('')
@@ -152,7 +157,35 @@ const SearchComicsPage = ({
     !searchComicsData.results.length)
   ) {
     comicsComponents = searchComicsData.results.map((comic, key) =>
-      <Comic key={key} comic={comic}/>
+      <Comic 
+        key={key} 
+        comic={comic}
+				disablePrevPaginator={comicService.shouldDisableLeftPaginator(key, searchComicsData.results)}
+				disableNextPaginator={comicService.shouldDisableRightPaginator(key, searchComicsData.results)}
+				openDefaultValue={isOpenStatesPerComic && isOpenStatesPerComic.length ? isOpenStatesPerComic[key] : false}
+				openNextComic={() => { 
+					setisOpenStatesPerComic(isOpenStatesPerComic => {
+						const isOpenStatesPerComicNew = []
+						searchComicsData.results.forEach((_, k) => {
+							isOpenStatesPerComicNew[k] = false
+						})
+						isOpenStatesPerComicNew[key] = false; 
+						isOpenStatesPerComicNew[key + 1] = true; 
+						return isOpenStatesPerComicNew
+					})
+				}}
+				openPrevComic={() => { 
+					setisOpenStatesPerComic(isOpenStatesPerComic => {
+						const isOpenStatesPerComicNew = []
+						searchComicsData.results.forEach((_, k) => {
+							isOpenStatesPerComicNew[k] = false
+						})
+						isOpenStatesPerComicNew[key] = false; 
+						isOpenStatesPerComicNew[key - 1] = true; 
+						return isOpenStatesPerComicNew				
+					})
+				}}
+      />
     )
   }
 
