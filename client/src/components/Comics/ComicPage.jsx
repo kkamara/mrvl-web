@@ -63,8 +63,8 @@ const ComicPage = ({
 			<div className="container text-center">
 				<Comic 
 					comic={data}
-					disabledPrevPaginator
-					disabledNextPaginator
+					disablePrevPaginator
+					disableNextPaginator
 				/>
 			</div>
 		)

@@ -86,11 +86,17 @@ function ComicModal({
       bottom: 511,
       position: 'absolute',
     }
+    if (disableNextPaginator && disablePrevPaginator) {
+      innerStyles.bottom = 548
+    }
     if (window.innerWidth < 650) {
       innerStyles = {
         ...innerStyles,
         ...styles.iconMobile,
-    }
+      }
+      if (disableNextPaginator && disablePrevPaginator) {
+        innerStyles.bottom = 466
+      }
     }
     return innerStyles
   }
