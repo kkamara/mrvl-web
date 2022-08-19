@@ -57,6 +57,8 @@ function ComicModal({
     if (onCloseCallback) {
       setForceClose(false)
       onCloseCallback()
+    } else if (disableNextPaginator && disablePrevPaginator) {
+      setForceClose(false)
     }
   }
 
