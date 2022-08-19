@@ -256,7 +256,7 @@ const styles = {
   iconMobile: {
     cursor: 'pointer',
     right: 32,
-    bottom: 466,
+    bottom: 427,
     fontSize: 50,
     position: 'absolute',
   },
