@@ -2,7 +2,6 @@ import React, { useState, useEffect, } from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
 import { useFlags, } from 'flagsmith/react'
-import ReactSwipe from 'react-swipe'
 
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
@@ -151,7 +150,6 @@ function ComicModal({
     />
   }
   
-  let reactSwipeEl
   return (
     <>
       <div className='comic-thumbnail-container' id={comic.id}>
@@ -163,71 +161,63 @@ function ComicModal({
         />
         <p onClick={handleOpenModalOperation}>{comic.title}</p>
       </div>
-      <ReactSwipe
-        className="carousel"
-        swipeOptions={{ continuous: false }}
-        ref={el => (reactSwipeEl = el)}
-      >
-        <div>
-          <Modal
-              isOpen={function() {
-                let res = open || openDefaultValue
-                if (forceClose) {
-                  res = false
-                }
-                return res
-              }()}
-              contentLabel='Comic Modal'
-              shouldCloseOnOverlayClick={true}
-              shouldCloseOnEsc={true}
-              onRequestClose={handleCloseModalOperation}
-              style={getModalStyles()}
-              onAfterOpen={() => { console.log('opened comic', comic) }}
+      <Modal
+          isOpen={function() {
+            let res = open || openDefaultValue
+            if (forceClose) {
+              res = false
+            }
+            return res
+          }()}
+          contentLabel='Comic Modal'
+          shouldCloseOnOverlayClick={true}
+          shouldCloseOnEsc={true}
+          onRequestClose={handleCloseModalOperation}
+          style={getModalStyles()}
+          onAfterOpen={() => { console.log('opened comic', comic) }}
+        >
+        <Card sx={{ maxWidth: 345 }}>
+          {__renderPaginationLinks()}
+          {__renderImage()}
+          {__renderFavouriteIcon()}
+          <CardContent>
+            <Typography gutterBottom variant='h5' component='div'>
+              {comic.title}
+            </Typography>
+            <Typography variant='body2' color='text.secondary'>
+              <span dangerouslySetInnerHTML={{ __html: comic.description, }} ></span>
+            </Typography>
+          </CardContent>
+          <hr/>
+          <CardActions>
+            <a 
+              className='btn btn-dark store-page-link'
+              href={comic.urls[0].url}
+              style={styles.linkBtn}
             >
-            <Card sx={{ maxWidth: 345 }}>
-              {__renderPaginationLinks()}
-              {__renderImage()}
-              {__renderFavouriteIcon()}
-              <CardContent>
-                <Typography gutterBottom variant='h5' component='div'>
-                  {comic.title}
-                </Typography>
-                <Typography variant='body2' color='text.secondary'>
-                  <span dangerouslySetInnerHTML={{ __html: comic.description, }} ></span>
-                </Typography>
-              </CardContent>
-              <hr/>
-              <CardActions>
-                <a 
-                  className='btn btn-dark store-page-link'
-                  href={comic.urls[0].url}
-                  style={styles.linkBtn}
-                >
-                  Store page
-                </a>
-              </CardActions>
-              <CardActions>
-                <a 
-                  onClick={handleCloseModalOperation} 
-                  className='btn btn-warning close-modal-btn close-modal-btn'
-                  style={styles.linkBtn}
-                >
-                  Close
-                </a>
-                {flags.copy_link_feature.enabled ?
-                  <a 
-                    href={copyPageURL} 
-                    className='btn btn-primary close-modal-btn copy-link-btn'
-                    style={{ ...styles.linkBtn, ...styles.floatRightBtn }}
-                  >
-                    Comic page
-                  </a> :
-                null}
-              </CardActions>
-            </Card>
-          </Modal>
-        </div>
-      </ReactSwipe>
+              Store page
+            </a>
+          </CardActions>
+          <CardActions>
+            <a 
+              onClick={handleCloseModalOperation} 
+              className='btn btn-warning close-modal-btn close-modal-btn'
+              style={styles.linkBtn}
+            >
+              Close
+            </a>
+            {flags.copy_link_feature.enabled ?
+              <a 
+                href={copyPageURL} 
+                className='btn btn-primary close-modal-btn copy-link-btn'
+                style={{ ...styles.linkBtn, ...styles.floatRightBtn }}
+              >
+                Comic page
+              </a> :
+            null}
+          </CardActions>
+        </Card>
+      </Modal>
     </>
   )
 }
