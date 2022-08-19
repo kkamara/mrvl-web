@@ -67,6 +67,15 @@ const FavouriteComicsPage = ({ getFavComics, comic, }) => {
 						return isOpenStatesPerComicNew				
 					})
 				}}
+				onCloseCallback={() => { 
+					setisOpenStatesPerComic(isOpenStatesPerComic => {
+						const isOpenStatesPerComicNew = []
+						favComics.items.forEach((_, k) => {
+							isOpenStatesPerComicNew[k] = false
+						})
+						return isOpenStatesPerComicNew
+					})
+				}}
 			/>
 		)
 	}

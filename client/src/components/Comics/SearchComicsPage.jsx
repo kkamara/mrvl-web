@@ -185,6 +185,15 @@ const SearchComicsPage = ({
 						return isOpenStatesPerComicNew				
 					})
 				}}
+				onCloseCallback={() => { 
+					setisOpenStatesPerComic(isOpenStatesPerComic => {
+						const isOpenStatesPerComicNew = []
+						searchComicsData.results.forEach((_, k) => {
+							isOpenStatesPerComicNew[k] = false
+						})
+						return isOpenStatesPerComicNew
+					})
+				}}
       />
     )
   }

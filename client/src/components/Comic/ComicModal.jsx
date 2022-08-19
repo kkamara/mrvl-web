@@ -32,6 +32,7 @@ function ComicModal({
   openNextComic,
   openPrevComic,
   openDefaultValue,
+  onCloseCallback,
 }) {
   const flags = useFlags(['copy_link_feature'],)
 
@@ -50,10 +51,14 @@ function ComicModal({
   const handleOpenModalOperation = () => {
     setOpen(true)
   }
-
+  
   const handleCloseModalOperation = () => {
     setOpen(false)
     setForceClose(true)
+    if (onCloseCallback) {
+      setForceClose(false)
+      onCloseCallback()
+    }
   }
 
   const handleFavouriteComicClick = () => {

@@ -115,6 +115,15 @@ const HomePage = ({
 						return isOpenStatesPerComicNew				
 					})
 				}}
+				onCloseCallback={() => { 
+					setisOpenStatesPerComic(isOpenStatesPerComic => {
+						const isOpenStatesPerComicNew = []
+						data.results.forEach((_, k) => {
+							isOpenStatesPerComicNew[k] = false
+						})
+						return isOpenStatesPerComicNew
+					})
+				}}
 			/>
 		})
 	}

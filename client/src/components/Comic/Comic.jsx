@@ -11,6 +11,7 @@ const Comic = ({
   openDefaultValue,
   openNextComic,
   openPrevComic,
+  onCloseCallback,
 }) => (  
   <ComicModal 
     comic={comic} 
@@ -21,6 +22,7 @@ const Comic = ({
     openDefaultValue={openDefaultValue}
     openNextComic={openNextComic}
     openPrevComic={openPrevComic}
+    onCloseCallback={onCloseCallback}
   />
 )
 
