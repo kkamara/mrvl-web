@@ -2,7 +2,7 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { useQuery, } from '../../utilities/methods'
 
-const SimplePagination = ({ data }) => {
+const SimplePagination = ({ data, hideFields, }) => {
     const query = useQuery()
     let offset = 0
 
@@ -42,6 +42,13 @@ const SimplePagination = ({ data }) => {
         nextOffsetURL.searchParams.set('offset', nextOffset)
     } else {
         nextOffsetURL.searchParams.append('offset', nextOffset)
+    }
+
+    if (hideFields && null === nextOffsetURL.searchParams.get('hideFields')) {
+        nextOffsetURL.searchParams.append('hideFields', hideFields)
+    }
+    if (hideFields && null === prevOffsetURL.searchParams.get('hideFields')) {
+        prevOffsetURL.searchParams.append('hideFields', hideFields)
     }
 
     const leftPaginateBtnClick = e => {

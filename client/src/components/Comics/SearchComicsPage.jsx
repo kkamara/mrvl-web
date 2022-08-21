@@ -259,11 +259,11 @@ const SearchComicsPage = ({
 		content = (
 			<div className="container text-center">
 				<div className="content-header">
-					<SimplePagination data={searchComicsData} />
+					<SimplePagination hideFields={hideFields} data={searchComicsData} />
 				</div>
 				{__renderComics()}
 				<div className="content-footer">
-					<SimplePagination data={searchComicsData} />
+					<SimplePagination hideFields={hideFields} data={searchComicsData} />
 				</div>
 			</div>
 		)
