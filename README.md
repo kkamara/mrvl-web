@@ -29,6 +29,36 @@ Start the server:
   # see ./package.json and client/package.json for change
 ```
 
+## Code snippet
+
+```bash
+    /** 
+     * Return searchable paginated characters api response
+     * @param {array} ids
+     * @return {Promise}
+     */
+    async getFavComics(ids) {
+        const promises = []
+        let comics = []
+
+        for (const id of ids) {
+            promises.push(new Promise(async resolve => {
+                const comic = await axios.get(`${apiURL}/api/v1/comics/${id}`)
+                resolve(comic.data.data)
+            })) 
+        }   
+            
+        await new Promise((resolve, reject) => {
+            Promise.all(promises).then(data => {
+                    comics = data
+                    resolve()
+                })  
+                .catch(err => { throw err })
+        })  
+        return comics
+    }
+```
+
 ## Misc
 
 Each Marvel API key ([see environment variables](https://raw.githubusercontent.com/kkamara/mrvl/main/.env.example)) has a request limit of 3000/day.
