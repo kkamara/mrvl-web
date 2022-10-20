@@ -4,13 +4,7 @@ Browse and manage your favourite Marvel Comics.
 ## Installation
 
 * [Node.js](https://nodejs.org/en/) 
-* [npm](https://www.npmjs.com/get-npm) 
-* [Yarn](https://www.yarnpkg.com)
-
-```bash
-  npm i -g yarn
-```
-
+* [pNpM](https://pnpm.io/)
 
 ## Usage
 
@@ -27,8 +21,8 @@ Start the server:
 ```bash
   cp .env.example .env
   export NODE_OPTIONS=--openssl-legacy-provider
-  yarn install
-  yarn dev
+  pnpm install
+  pnpm run dev
   # defaults:
   #   server: http://localhost:3000
   #   client: http://localhost:5000
