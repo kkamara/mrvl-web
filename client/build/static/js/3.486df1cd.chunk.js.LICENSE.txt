@@ -16,24 +16,6 @@ object-assign
    */
 
 /*!
-  Copyright (c) 2015 Jed Watson.
-  Based on code that is Copyright 2013-2015, Facebook, Inc.
-  All rights reserved.
-*/
-
-/*!
- * Adapted from jQuery UI core
- *
- * http://jqueryui.com
- *
- * Copyright 2014 jQuery Foundation and other contributors
- * Released under the MIT license.
- * http://jquery.org/license
- *
- * http://api.jqueryui.com/category/ui-core/
- */
-
-/*!
  * jQuery JavaScript Library v3.6.1
  * https://jquery.com/
  *
@@ -45,14 +27,6 @@ object-assign
  * https://jquery.org/license
  *
  * Date: 2022-08-26T17:52Z
- */
-
-/*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
-
-/** @license MUI v5.10.8
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
  */
 
 /** @license React v0.20.2
