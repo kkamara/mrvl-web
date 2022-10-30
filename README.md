@@ -19,44 +19,44 @@ export const ENV = 'local'
 
 Start the server:
 ```bash
-  cp .env.example .env
-  export NODE_OPTIONS=--openssl-legacy-provider
-  pnpm install
-  pnpm run dev
-  # defaults:
-  #   server: http://localhost:3000
-  #   client: http://localhost:5000
-  # see ./package.json and client/package.json for change
+cp .env.example .env
+export NODE_OPTIONS=--openssl-legacy-provider
+pnpm install
+pnpm run dev
+# defaults:
+#   server: http://localhost:3000
+#   client: http://localhost:5000
+# see ./package.json and client/package.json for change
 ```
 
 ## Code snippet
 
-```bash
-    /** 
-     * Return searchable paginated characters api response
-     * @param {array} ids
-     * @return {Promise}
-     */
-    async getFavComics(ids) {
-        const promises = []
-        let comics = []
+```js
+/** 
+ * Return searchable paginated characters api response
+ * @param {array} ids
+ * @return {Promise}
+ */
+async getFavComics(ids) {
+  const promises = []
+  let comics = []
 
-        for (const id of ids) {
-            promises.push(new Promise(async resolve => {
-                const comic = await axios.get(`${apiURL}/api/v1/comics/${id}`)
-                resolve(comic.data.data)
-            })) 
-        }   
-            
-        await new Promise((resolve, reject) => {
-            Promise.all(promises).then(data => {
-                    comics = data
-                    resolve()
-                })  
-                .catch(err => { throw err })
-        })  
-        return comics
-    }
+  for (const id of ids) {
+    promises.push(new Promise(async resolve => {
+      const comic = await axios.get(`${apiURL}/api/v1/comics/${id}`)
+      resolve(comic.data.data)
+    }))
+  }
+
+  await new Promise((resolve, reject) => {
+    Promise.all(promises).then(data => 
+      comics = data
+      resolve()
+    })  
+    .catch(err => { throw err })
+  })  
+  return comics
+}
 ```
 
 ## Misc
