@@ -2,6 +2,10 @@
 
 ![mrvl2.png](https://raw.githubusercontent.com/kkamara/useful/main/mrvl2.png)
 
+![mrvl3.png](https://raw.githubusercontent.com/kkamara/useful/main/mrvl3.png)
+
+![mrvl4.png](https://raw.githubusercontent.com/kkamara/useful/main/mrvl4.png)
+
 # mrvl
 Browse and manage your favourite Marvel Comics.
 
