@@ -25,14 +25,14 @@ const App = () => (
           <Suspense fallback={Loader}>
             <Fragment>
                 <Header />
-                <Switch>
+                {/* <Switch> */}
                     <Route path='/' exact component={HomePage} />
                     <Route path='/comic/:comic' exact component={ComicPage} />
                     <Route path='/search' exact component={SearchComicsPage} />
                     <Route path='/favs' exact component={FavouriteComicsPage} />
                     <Route path='/404' exact component={Page404} />
-                    <Redirect to='/404' />
-                </Switch>
+                    {/* <Redirect to='/404' />
+                </Switch> */}
                 <Footer />
             </Fragment>
           </Suspense>
