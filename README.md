@@ -18,25 +18,19 @@ Browse and manage your favourite Marvel Comics.
 
 ## Usage
 
-Update https://github.com/kkamara/mrvl/blob/main/client/src/constants.jsx to the following:
+Update https://github.com/kkamara/mrvl/blob/main/src/constants.jsx to the following:
 
 ```bash
-// export const API_URL = 'https://mrvl.herokuapp.com/api/v1'
 // export const ENV = 'prod'
-export const API_URL = 'http://localhost:3000/api/v1'
 export const ENV = 'local'
 ```
 
 Start the server:
 ```bash
 cp .env.example .env
-export NODE_OPTIONS=--openssl-legacy-provider
 pnpm install
-pnpm run dev
-# defaults:
-#   server: http://localhost:3000
-#   client: http://localhost:5000
-# see ./package.json and client/package.json for change
+pnpm start
+# http://localhost:5000/mrvl
 ```
 
 ## Code snippet
@@ -53,8 +47,8 @@ async getFavComics(ids) {
 
   for (const id of ids) {
     promises.push(new Promise(async resolve => {
-      const comic = await axios.get(`${apiURL}/api/v1/comics/${id}`)
-      resolve(comic.data.data)
+      const comic = await this.getComic(id)
+      resolve(comic.data.data.results[0])
     }))
   }
 

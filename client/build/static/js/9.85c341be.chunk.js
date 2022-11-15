@@ -1,2 +1,0 @@
-(this.webpackJsonpclient=this.webpackJsonpclient||[]).push([[9],{175:function(t,e,c){},196:function(t,e,c){"use strict";c.r(e);c(0);var n=c(16),r=(c(175),c(2));e.default=function(){return Object(r.jsx)("footer",{className:"footer",children:Object(r.jsxs)("div",{className:"container text-center footer-text",children:[n.b," \xa9 ",n.e,"\xa0",Object(r.jsx)("a",{target:"_blank",href:"https://github.com/kkamara/mrvl",children:"Github"})]})})}}}]);
-//# sourceMappingURL=9.85c341be.chunk.js.map

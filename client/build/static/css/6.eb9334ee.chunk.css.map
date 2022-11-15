@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack://src/components/Page404.scss"],"names":[],"mappings":"AAAA,oCACE,WACE,WAAA,CAAA","file":"6.eb9334ee.chunk.css","sourcesContent":["@media screen and (max-width: 650px) {\n  .image-404 {\n    width: 368px;\n  }\n}\n"]}
