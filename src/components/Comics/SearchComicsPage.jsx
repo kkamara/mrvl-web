@@ -244,7 +244,6 @@ const SearchComicsPage = ({
     }
     loadSearchComics(payload, offset)
   }
-        console.log(comicsFiltersData, comicsFiltersFetched, comicsFiltersLoading)
 
 	if (!comicsFiltersData && !comicsFiltersFetched && !comicsFiltersLoading) {
     return <Loader />

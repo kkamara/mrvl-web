@@ -176,7 +176,6 @@ export default class MarvelService{
         ) {
             for (const key in queryParams) {
                 const val = queryParams[key]
-                console.log(key,val, typeof val)
                 if (null === val || (typeof val === 'string' && !val.length)) {
                     continue
                 }
