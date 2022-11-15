@@ -25,11 +25,11 @@ const App = () => (
       <Fragment>
         <Header />
         {/* <Switch> */}
-            <Route path='/' exact component={HomePage} />
-            <Route path='/comic/:comic' exact component={ComicPage} />
-            <Route path='/search' exact component={SearchComicsPage} />
-            <Route path='/favs' exact component={FavouriteComicsPage} />
-            <Route path='/404' exact component={Page404} />
+            <Route path='/' component={HomePage} />
+            <Route path='/comic/:comic' component={ComicPage} />
+            <Route path='/search' component={SearchComicsPage} />
+            <Route path='/favs' component={FavouriteComicsPage} />
+            <Route path='/404' component={Page404} />
             {/* <Redirect to='/404' />
         </Switch> */}
         <Footer />
