@@ -12,32 +12,30 @@ import './App.scss'
 import Header from './components/Header'
 import Loader from "./components/Loader"
 
-const FavouriteComicsPage = lazy(() => import('./components/FavouriteComics/FavouriteComicsPage'))
-const HomePage = lazy(() => import('./components/Comics/HomePage'))
-const ComicPage = lazy(() => import('./components/Comics/ComicPage'))
-const SearchComicsPage = lazy(() => import('./components/Comics/SearchComicsPage'))
-const Page404 = lazy(() => import('./components/Page404'))
-const Footer = lazy(() => import('./components/Footer'))
+import FavouriteComicsPage from './components/FavouriteComics/FavouriteComicsPage'
+import HomePage from './components/Comics/HomePage'
+import ComicPage from './components/Comics/ComicPage'
+import SearchComicsPage from './components/Comics/SearchComicsPage'
+import Page404 from './components/Page404'
+import Footer from './components/Footer'
 
 const App = () => (
-    <div id='app'>
-        <BrowserRouter basename='/mrvl'>
-          <Suspense fallback={Loader}>
-            <Fragment>
-                <Header />
-                {/* <Switch> */}
-                    <Route path='/' exact component={HomePage} />
-                    <Route path='/comic/:comic' exact component={ComicPage} />
-                    <Route path='/search' exact component={SearchComicsPage} />
-                    <Route path='/favs' exact component={FavouriteComicsPage} />
-                    <Route path='/404' exact component={Page404} />
-                    {/* <Redirect to='/404' />
-                </Switch> */}
-                <Footer />
-            </Fragment>
-          </Suspense>
-        </BrowserRouter>
-    </div>
+  <div id='app'>
+    <BrowserRouter basename='/mrvl'>
+      <Fragment>
+        <Header />
+        {/* <Switch> */}
+            <Route path='/' exact component={HomePage} />
+            <Route path='/comic/:comic' exact component={ComicPage} />
+            <Route path='/search' exact component={SearchComicsPage} />
+            <Route path='/favs' exact component={FavouriteComicsPage} />
+            <Route path='/404' exact component={Page404} />
+            {/* <Redirect to='/404' />
+        </Switch> */}
+        <Footer />
+      </Fragment>
+    </BrowserRouter>
+  </div>
 )
 
 export default App
