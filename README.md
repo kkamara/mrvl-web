@@ -27,7 +27,6 @@ export const ENV = 'local'
 
 Start the server:
 ```bash
-cp .env.example .env
 pnpm install
 pnpm start
 # http://localhost:5000/mrvl
