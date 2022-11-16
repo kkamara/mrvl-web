@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/mrvl/static/css/main.6e87323b.chunk.css",
-    "main.js": "/mrvl/static/js/main.63312045.chunk.js",
-    "main.js.map": "/mrvl/static/js/main.63312045.chunk.js.map",
+    "main.js": "/mrvl/static/js/main.3362cae1.chunk.js",
+    "main.js.map": "/mrvl/static/js/main.3362cae1.chunk.js.map",
     "runtime-main.js": "/mrvl/static/js/runtime-main.7374b13a.js",
     "runtime-main.js.map": "/mrvl/static/js/runtime-main.7374b13a.js.map",
     "static/css/2.42d51ddf.chunk.css": "/mrvl/static/css/2.42d51ddf.chunk.css",
-    "static/js/2.52c0aa69.chunk.js": "/mrvl/static/js/2.52c0aa69.chunk.js",
-    "static/js/2.52c0aa69.chunk.js.map": "/mrvl/static/js/2.52c0aa69.chunk.js.map",
+    "static/js/2.2d8bff8c.chunk.js": "/mrvl/static/js/2.2d8bff8c.chunk.js",
+    "static/js/2.2d8bff8c.chunk.js.map": "/mrvl/static/js/2.2d8bff8c.chunk.js.map",
     "index.html": "/mrvl/index.html",
     "static/css/2.42d51ddf.chunk.css.map": "/mrvl/static/css/2.42d51ddf.chunk.css.map",
     "static/css/main.6e87323b.chunk.css.map": "/mrvl/static/css/main.6e87323b.chunk.css.map",
-    "static/js/2.52c0aa69.chunk.js.LICENSE.txt": "/mrvl/static/js/2.52c0aa69.chunk.js.LICENSE.txt",
+    "static/js/2.2d8bff8c.chunk.js.LICENSE.txt": "/mrvl/static/js/2.2d8bff8c.chunk.js.LICENSE.txt",
     "static/media/marvel-moving.e4ed4a95.gif": "/mrvl/static/media/marvel-moving.e4ed4a95.gif",
     "static/media/modal-background.ebda8efe.jpg": "/mrvl/static/media/modal-background.ebda8efe.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.7374b13a.js",
     "static/css/2.42d51ddf.chunk.css",
-    "static/js/2.52c0aa69.chunk.js",
+    "static/js/2.2d8bff8c.chunk.js",
     "static/css/main.6e87323b.chunk.css",
-    "static/js/main.63312045.chunk.js"
+    "static/js/main.3362cae1.chunk.js"
   ]
 }

@@ -1,4 +1,4 @@
-import { BrowserRouter, Switch, Redirect, Route, } from 'react-router-dom'
+import { HashRouter, Switch, Redirect, Route, } from 'react-router-dom'
 import React, { Fragment, lazy, Suspense, } from 'react'
 
 import $ from'jquery'
@@ -21,7 +21,7 @@ import Footer from './components/Footer'
 
 const App = () => (
   <div id='app'>
-    <BrowserRouter basename='/mrvl'>
+    <HashRouter basename='/mrvl'>
       <Fragment>
         <Header />
         {/* <Switch> */}
@@ -34,7 +34,7 @@ const App = () => (
         </Switch> */}
         <Footer />
       </Fragment>
-    </BrowserRouter>
+    </HashRouter>
   </div>
 )
 
