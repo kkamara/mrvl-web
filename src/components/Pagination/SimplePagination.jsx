@@ -1,5 +1,4 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
 import { useQuery, } from '../../utilities/methods'
 
 const SimplePagination = ({ data, hideFields, }) => {
@@ -75,4 +74,4 @@ const SimplePagination = ({ data, hideFields, }) => {
     </>
 }
 
-export default withRouter(SimplePagination)
+export default SimplePagination

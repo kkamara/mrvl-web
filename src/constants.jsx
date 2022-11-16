@@ -1,5 +1,3 @@
-import path from 'path'
-
 export const APP_NAME = 'mrvl'.toUpperCase()
 export const YEAR_RELEASED = 2022
 export const GIPHY_API_KEY = 'M5Pj4m4sIMVxGzJvOEOHwWbzl5UcOKjE'

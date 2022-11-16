@@ -1,14 +1,10 @@
 import React from 'react'
 import { Helmet, } from "react-helmet"
-import { useFlags, } from 'flagsmith/react'
-import { ENV, } from '../constants'
 
 import image from '../assets/marvel-moving.gif'
 import './Header.scss'
 
 const Header = () => {
-    const flags = useFlags(['search_page'],)
-
 	const __renderHeaderTags = () => {
 		return <Helmet>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -28,9 +24,7 @@ const Header = () => {
             </div>
             <nav className='container nav-container'>
                 <a className='btn btn-warning btn-lg' href='/mrvl'>Home</a>
-                {flags.search_page.enabled ?
-                    <a className='btn btn-warning btn-lg' href='/mrvl/search'>Search</a> :
-                    null}
+                <a className='btn btn-warning btn-lg' href='/mrvl/search'>Search</a>
                 <a className='btn btn-warning btn-lg' href='/mrvl/favs'>Favourites</a>
                 <a className='btn btn-warning btn-lg' href='/mrvl/404'>404 page</a>
             </nav>

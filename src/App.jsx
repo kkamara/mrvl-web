@@ -1,4 +1,4 @@
-import { HashRouter, Switch, Redirect, Route, } from 'react-router-dom'
+import { BrowserRouter, Switch, Redirect, Route, Routes, Navigate, } from 'react-router-dom'
 import React, { Fragment, lazy, Suspense, } from 'react'
 
 import $ from'jquery'
@@ -21,20 +21,20 @@ import Footer from './components/Footer'
 
 const App = () => (
   <div id='app'>
-    <HashRouter basename='/mrvl'>
+    <BrowserRouter basename='/mrvl/'>
       <Fragment>
         <Header />
-        {/* <Switch> */}
-            <Route path='/' component={HomePage} />
-            <Route path='/comic/:comic' component={ComicPage} />
-            <Route path='/search' component={SearchComicsPage} />
-            <Route path='/favs' component={FavouriteComicsPage} />
-            <Route path='/404' component={Page404} />
-            {/* <Redirect to='/404' />
-        </Switch> */}
+        <Routes>
+          <Route path='/' element={<HomePage/>} />
+          <Route path='/comic/:comic' element={<ComicPage/>} />
+          <Route path='/search' element={<SearchComicsPage/>} />
+          <Route path='/favs' element={<FavouriteComicsPage/>} />
+          <Route path='/404' element={<Page404/>} />
+          <Route path="/*" element={<Navigate replace to="/404" />} />
+        </Routes>
         <Footer />
       </Fragment>
-    </HashRouter>
+    </BrowserRouter>
   </div>
 )
 
