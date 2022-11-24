@@ -1,6 +1,6 @@
 ## Live links
 
-- ~~https://mrvl.herokuapp.com/~~
+- ~~https://mrvl.herokuapp.com/search~~
 - [https://github.io/kkamara/mrvl](https://kkamara.github.io/mrvl)
 
 ![marvel-moving](https://user-images.githubusercontent.com/31970496/201666745-37f4c424-0557-4051-bf27-d40cd0b09780.gif)
