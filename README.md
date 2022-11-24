@@ -25,7 +25,7 @@ Browse and manage your favourite Marvel Comics.
 
 Update https://github.com/kkamara/mrvl/blob/main/src/constants.jsx to the following:
 
-```bash
+```js
 // export const ENV = 'prod'
 export const ENV = 'local'
 ```
