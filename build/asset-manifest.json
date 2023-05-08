@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/mrvl/static/css/main.dc2d95f1.css",
-    "main.js": "/mrvl/static/js/main.cb077ade.js",
-    "static/media/marvel-moving.gif": "/mrvl/static/media/marvel-moving.e4ed4a95ce1d140cc61e.gif",
-    "static/media/modal-background.jpg": "/mrvl/static/media/modal-background.ebda8efe5b22e6f4235f.jpg",
+    "main.js": "/mrvl/static/js/main.c82153fe.js",
+    "static/media/marvel-moving.gif": "/mrvl/static/media/marvel-moving.4a34c18cfc95ad513182.gif",
+    "static/media/modal-background.jpg": "/mrvl/static/media/modal-background.07cda4d6ea06c5a07f97.jpg",
     "index.html": "/mrvl/index.html",
     "main.dc2d95f1.css.map": "/mrvl/static/css/main.dc2d95f1.css.map",
-    "main.cb077ade.js.map": "/mrvl/static/js/main.cb077ade.js.map"
+    "main.c82153fe.js.map": "/mrvl/static/js/main.c82153fe.js.map"
   },
   "entrypoints": [
     "static/css/main.dc2d95f1.css",
-    "static/js/main.cb077ade.js"
+    "static/js/main.c82153fe.js"
   ]
 }
