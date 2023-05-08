@@ -21,6 +21,10 @@ Browse and manage your favourite Marvel Comics.
 * [Node.js](https://nodejs.org/en/) 
 * [pNpM](https://pnpm.io/)
 
+```sh
+cp .env.example .env
+```
+
 ## Usage
 
 Update https://github.com/kkamara/mrvl/blob/main/src/constants.jsx to the following:
