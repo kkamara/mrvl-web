@@ -19,10 +19,11 @@ Browse and manage your favourite Marvel Comics. Reactjs.
 ## Installation
 
 * [Node.js](https://nodejs.org/en/) 
-* [pNpM](https://pnpm.io/)
+* [Yarn](https://yarnpkg.com/)
 
 ```sh
 cp .env.example .env
+yarn install # and yarn
 ```
 
 ## Usage
@@ -36,8 +37,7 @@ export const ENV = 'local'
 
 Start the server:
 ```bash
-pnpm install
-pnpm start
+yarn start
 # http://localhost:5000/mrvl
 ```
 
