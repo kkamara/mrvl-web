@@ -1,8 +1,4 @@
-import React, { 
-	useState, 
-	useEffect, 
-	useCallback,
-} from "react"
+import React, { useState, useEffect, } from "react"
 import { connect, } from "react-redux"
 import { Helmet, } from "react-helmet"
 import ComicService from '../../service/comicService'
@@ -41,7 +37,7 @@ const HomePage = ({
 	useEffect(() => {
 		loadComics(offset)
 		loadFavComics()
-	}, [])
+	}, [offset,])
 
 	const loadComics = (offset) => {
 		getComics(offset)
@@ -134,11 +130,17 @@ const HomePage = ({
 		content = (
 			<div className="container text-center">
 				<div className="content-header">
-					<SimplePagination data={data} />
+					<SimplePagination 
+						searchParams={{ offset, }}
+						data={data}
+					/>
 				</div>
 				{__renderComics()}
 				<div className="content-footer">
-					<SimplePagination data={data} />
+					<SimplePagination 
+						searchParams={{ offset, }}
+						data={data}
+					/>
 				</div>
 			</div>
 		)

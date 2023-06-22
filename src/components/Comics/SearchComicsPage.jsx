@@ -1,4 +1,5 @@
 import React, { useEffect, useState, } from 'react'
+import { useNavigate, createSearchParams, } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Helmet, } from "react-helmet"
 import ComicService from '../../service/comicService'
@@ -23,6 +24,7 @@ const SearchComicsPage = ({
   comicsFilters,
   searchComics,
 }) => {
+  const navigate = useNavigate()
 	const query = useQuery()
 	let paginationOffset = 0
 
@@ -62,38 +64,66 @@ const SearchComicsPage = ({
   const [limit, setLimit] = useState('')
   const [offset, setOffset] = useState('')
 
+  const queryHideFields = query.get('hideFields')
+  const queryFormat = query.get('format')
+  const queryFormatType = query.get('formatType')
+  const queryNoVariants = query.get('noVariants')
+  const queryDateDescriptor = query.get('dateDescriptor')
+  const queryDateRange = query.get('dateRange')
+  const queryTitle = query.get('title')
+  const queryTitleStartsWith = query.get('titleStartsWith')
+  const queryStartYear = query.get('startYear')
+  const queryIssueNumber = query.get('issueNumber')
+  const queryDiamondCode = query.get('diamondCode')
+  const queryDigitalID = query.get('digitalID')
+  const queryUpc = query.get('upc')
+  const queryIsbn = query.get('isbn')
+  const queryEan = query.get('ean')
+  const queryIssn = query.get('issn')
+  const queryHasDigitalIssue = query.get('hasDigitalIssue')
+  const queryModifiedSince = query.get('modifiedSince')
+  const queryCreators = query.get('creators')
+  const queryCharacters = query.get('characters')
+  const querySeries = query.get('series')
+  const queryEvents = query.get('events')
+  const queryStories = query.get('stories')
+  const querySharedAppearances = query.get('sharedAppearances')
+  const queryCollaborators = query.get('collaborators')
+  const queryOrderBy = query.get('orderBy')
+  const queryLimit = query.get('limit')
+
 	useEffect(() => {
 		loadComicsFilters(paginationOffset)
-    if (query.get('hideFields') === 'true') {
+    if (queryHideFields === 'true') {
       setHideFields(true)
     }
     const payload = {
-      format: query.get('format'),
-      formatType: query.get('formatType'),
-      noVariants: query.get('noVariants'),
-      dateDescriptor: query.get('dateDescriptor'),
-      dateRange: query.get('dateRange'),
-      title: query.get('title'),
-      titleStartsWith: query.get('titleStartsWith'),
-      startYear: query.get('startYear'),
-      issueNumber: query.get('issueNumber'),
-      diamondCode: query.get('diamondCode'),
-      digitalID: query.get('digitalID'),
-      upc: query.get('upc'),
-      isbn: query.get('isbn'),
-      ean: query.get('ean'),
-      issn: query.get('issn'),
-      hasDigitalIssue: query.get('hasDigitalIssue'),
-      modifiedSince: query.get('modifiedSince'),
-      creators: query.get('creators'),
-      characters: query.get('characters'),
-      series: query.get('series'),
-      events: query.get('events'),
-      stories: query.get('stories'),
-      sharedAppearances: query.get('sharedAppearances'),
-      collaborators: query.get('collaborators'),
-      orderBy: query.get('orderBy'),
-      limit: query.get('limit'),
+      format: queryFormat,
+      formatType: queryFormatType,
+      noVariants: queryNoVariants,
+      dateDescriptor: queryDateDescriptor,
+      dateRange: queryDateRange,
+      title: queryTitle,
+      titleStartsWith: queryTitleStartsWith,
+      startYear: queryStartYear,
+      issueNumber: queryIssueNumber,
+      diamondCode: queryDiamondCode,
+      digitalID: queryDigitalID,
+      upc: queryUpc,
+      isbn: queryIsbn,
+      ean: queryEan,
+      issn: queryIssn,
+      hasDigitalIssue: queryHasDigitalIssue,
+      modifiedSince: queryModifiedSince,
+      creators: queryCreators,
+      characters: queryCharacters,
+      series: querySeries,
+      events: queryEvents,
+      stories: queryStories,
+      sharedAppearances: querySharedAppearances,
+      collaborators: queryCollaborators,
+      orderBy: queryOrderBy,
+      limit: queryLimit,
       offset: paginationOffset,
     }
     let urlParamExists = false
@@ -117,7 +147,7 @@ const SearchComicsPage = ({
       // search comics with filters from url  
       loadSearchComics(payload, payload.offset)
     }
-	}, [])
+	}, [paginationOffset, queryFormat, queryFormatType, queryNoVariants, queryDateDescriptor, queryDateRange, queryTitle, queryTitleStartsWith, queryStartYear, queryIssueNumber, queryDiamondCode, queryDigitalID, queryUpc, queryIsbn, queryEan, queryIssn, queryHasDigitalIssue, queryModifiedSince, queryCreators, queryCharacters, querySeries, queryEvents, queryStories, querySharedAppearances, queryCollaborators, queryOrderBy, queryLimit,])
 
 	const loadComicsFilters = (paginationOffset) => {
 		getComicsFilters(paginationOffset)
@@ -212,8 +242,10 @@ const SearchComicsPage = ({
 		return comicsComponents
 	}
   
-  const handleSearchPageFormSubmit = () => {
+  const handleSearchPageFormSubmit = e => {
+    e.preventDefault()
     const payload = {
+      hideFields,
       format,
       formatType,
       noVariants,
@@ -242,7 +274,10 @@ const SearchComicsPage = ({
       limit,
       offset,
     }
-    loadSearchComics(payload, offset)
+    navigate({
+      pathname: '/search', 
+      search: `?${createSearchParams(payload).toString()}`,
+    })
   }
 
 	if (!comicsFiltersData && !comicsFiltersFetched && !comicsFiltersLoading) {
@@ -258,11 +293,75 @@ const SearchComicsPage = ({
 		content = (
 			<div className="container text-center">
 				<div className="content-header">
-					<SimplePagination hideFields={hideFields} data={searchComicsData} />
+					<SimplePagination 
+            data={searchComicsData}
+            searchParams={{
+              hideFields,
+              format,
+              formatType,
+              noVariants,
+              dateDescriptor,
+              dateRange,
+              title,
+              titleStartsWith,
+              startYear,
+              issueNumber,
+              diamondCode,
+              digitalID,
+              upc,
+              isbn,
+              ean,
+              issn,
+              hasDigitalIssue,
+              modifiedSince,
+              creators,
+              characters,
+              series,
+              events,
+              stories,
+              sharedAppearances,
+              collaborators,
+              orderBy,
+              limit,
+              offset,
+            }}
+          />
 				</div>
 				{__renderComics()}
 				<div className="content-footer">
-					<SimplePagination hideFields={hideFields} data={searchComicsData} />
+          <SimplePagination 
+            data={searchComicsData}
+            searchParams={{
+              hideFields,
+              format,
+              formatType,
+              noVariants,
+              dateDescriptor,
+              dateRange,
+              title,
+              titleStartsWith,
+              startYear,
+              issueNumber,
+              diamondCode,
+              digitalID,
+              upc,
+              isbn,
+              ean,
+              issn,
+              hasDigitalIssue,
+              modifiedSince,
+              creators,
+              characters,
+              series,
+              events,
+              stories,
+              sharedAppearances,
+              collaborators,
+              orderBy,
+              limit,
+              offset,
+            }}
+          />
 				</div>
 			</div>
 		)
@@ -824,12 +923,9 @@ const SearchComicsPage = ({
             </div>
 
             <div className="form-group w-100" style={styles.submitBtnContainer}>
-              <input
-                className="btn btn-info btn-lg"
-                style={styles.submitBtn}
-                type='submit'
-                value='Go'
-              />
+              <button className="btn btn-info btn-lg" style={styles.submitBtn}>
+                Go
+              </button>
             </div>
           </div>
         </div>
