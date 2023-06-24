@@ -1,8 +1,3 @@
-## Live links
-
-- ~~https://mrvl.herokuapp.com/search~~ ([Nodejs](https://nodejs.org/en/) & [react](https://reactjs.org/)) ([branches](https://github.com/kkamara/mrvl/branches))
-- [https://github.io/kkamara/mrvl](https://kkamara.github.io/mrvl) ([react](https://reactjs.org/))
-
 ![marvel-moving](https://user-images.githubusercontent.com/31970496/201666745-37f4c424-0557-4051-bf27-d40cd0b09780.gif)
 
 ![mrvl4.png](https://raw.githubusercontent.com/kkamara/useful/main/mrvl4.png)
@@ -13,7 +8,7 @@
 
 ![mrvl3.png](https://raw.githubusercontent.com/kkamara/useful/main/mrvl3.png)
 
-# mrvl
+# mrvl-web
 Browse and manage your favourite Marvel Comics. Reactjs.
 
 ## Installation
