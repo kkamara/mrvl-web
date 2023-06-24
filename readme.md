@@ -23,7 +23,7 @@ yarn install # and yarn
 
 ## Usage
 
-Update https://github.com/kkamara/mrvl/blob/main/src/constants.jsx to the following:
+Update https://github.com/kkamara/mrvl-web/blob/main/src/constants.jsx to the following:
 
 ```js
 // export const ENV = 'prod'
@@ -33,7 +33,7 @@ export const ENV = 'local'
 Start the server:
 ```bash
 yarn start
-# http://localhost:5000/mrvl
+# http://localhost:5000/mrvl-web
 ```
 
 ## Code snippet
@@ -68,7 +68,7 @@ async getFavComics(ids) {
 
 ## Misc
 
-Each Marvel API key ([see environment variables](https://raw.githubusercontent.com/kkamara/mrvl/main/.env.example)) has a request limit of 3000/day.
+Each Marvel API key ([see environment variables](https://raw.githubusercontent.com/kkamara/mrvl-web/main/.env.example)) has a request limit of 3000/day.
 
 [See react boilerplate.](https://github.com/kkamara/react-boilerplate)
 

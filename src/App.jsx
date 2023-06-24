@@ -21,7 +21,7 @@ import Footer from './components/Footer'
 
 const App = () => (
   <div id='app'>
-    <BrowserRouter basename='/mrvl/'>
+    <BrowserRouter basename='/mrvl-web/'>
       <Fragment>
         <Header />
         <Routes>

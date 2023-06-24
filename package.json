@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kkamara/mrvl.git"
+    "url": "git+https://github.com/kkamara/mrvl-web.git"
   },
   "author": "https://github.com/kkamara",
   "license": "BSD-3",
   "bugs": {
-    "url": "https://github.com/kkamara/mrvl/issues"
+    "url": "https://github.com/kkamara/mrvl-web/issues"
   },
-  "homepage": "https://kkamara.github.io/mrvl",
+  "homepage": "https://kkamara.github.io/mrvl-web",
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-react": "^7.0.0",
