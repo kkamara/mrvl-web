@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/mrvl-web/static/css/main.dc2d95f1.css",
-    "main.js": "/mrvl-web/static/js/main.d40f2656.js",
+    "main.js": "/mrvl-web/static/js/main.e448fbf0.js",
     "static/media/marvel-moving.gif": "/mrvl-web/static/media/marvel-moving.4a34c18cfc95ad513182.gif",
     "static/media/modal-background.jpg": "/mrvl-web/static/media/modal-background.07cda4d6ea06c5a07f97.jpg",
     "index.html": "/mrvl-web/index.html",
     "main.dc2d95f1.css.map": "/mrvl-web/static/css/main.dc2d95f1.css.map",
-    "main.d40f2656.js.map": "/mrvl-web/static/js/main.d40f2656.js.map"
+    "main.e448fbf0.js.map": "/mrvl-web/static/js/main.e448fbf0.js.map"
   },
   "entrypoints": [
     "static/css/main.dc2d95f1.css",
-    "static/js/main.d40f2656.js"
+    "static/js/main.e448fbf0.js"
   ]
 }
