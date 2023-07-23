@@ -2,7 +2,6 @@ import React, { useState, useEffect, } from 'react'
 import { Link, } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
-import { useFlags, } from 'flagsmith/react'
 
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
@@ -34,12 +33,10 @@ function ComicModal({
   openDefaultValue,
   onCloseCallback,
 }) {
-  const flags = useFlags(['copy_link_feature'],)
-
   const [open, setOpen] = useState(false)
   const [forceClose, setForceClose] = useState(false)
 
-  const copyPageURL = '/comic/' + comic.id
+  const copyPageURL = '/comic/' + comic.id + '/'
 
   useEffect(() => {
     if (openDefaultValue && open && forceClose) {
@@ -214,15 +211,13 @@ function ComicModal({
             >
               Close
             </a>
-            {flags.copy_link_feature.enabled ?
-              <Link
-                to={copyPageURL} 
-                className='btn btn-primary close-modal-btn copy-link-btn'
-                style={{ ...styles.linkBtn, ...styles.floatRightBtn }}
-              >
-                Comic page
-              </Link> :
-            null}
+            <Link
+              to={copyPageURL} 
+              className='btn btn-primary close-modal-btn copy-link-btn'
+              style={{ ...styles.linkBtn, ...styles.floatRightBtn }}
+            >
+              Comic page
+            </Link>
           </CardActions>
         </Card>
       </Modal>

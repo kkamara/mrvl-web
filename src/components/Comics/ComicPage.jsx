@@ -14,10 +14,18 @@ const ComicPage = ({
 	getComic, 
 	singleComic: comic, 
 }) => {
-
-	const { comic: data, fetched, loading, } = comic
-	const pathname = window.location.pathname
-	const id = pathname.slice(pathname.lastIndexOf('/') + 1)
+	const { comic: comicData, fetched, loading, } = comic
+	let data = false;
+	if (fetched && !loading && comicData !== false) {
+		data = comicData.results[0];
+	}
+	let url = window.location.href.slice(0,
+    window.location.href.lastIndexOf('/')
+	)
+	const id = url.slice(
+		url.lastIndexOf('/') + 1
+	)
+	
 	let pageTitle = ` | ${APP_NAME}`
 	
 	useEffect(() => {
@@ -57,7 +65,7 @@ const ComicPage = ({
 
 	let content = null
 
-	if (fetched && !loading) {
+	if (fetched && !loading && data !== false) {
 		pageTitle = data.title + pageTitle
 		content = (
 			<div className="container text-center">
