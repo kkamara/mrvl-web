@@ -16,12 +16,13 @@ const Header = () => {
         {__renderHeaderTags()}
         <header className='header' style={styles.header}>
             <div className='container text-left'>
-                <img 
-                    className='header-img'
-                    src={image} 
-                    alt='marvel-moving.gif' 
-                    onClick={() => { window.location.href = '/' }}
-                />
+                <Link to='/'>
+                    <img 
+                        className='header-img'
+                        src={image} 
+                        alt='marvel-moving.gif' 
+                    />
+                </Link>
             </div>
             <nav className='container nav-container'>
                 <Link className='btn btn-warning btn-lg' to='/'>Home</Link>
