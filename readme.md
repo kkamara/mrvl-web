@@ -13,12 +13,11 @@ Browse and manage your favourite Marvel Comics. Reactjs.
 
 ## Installation
 
-* [Node.js](https://nodejs.org/en/) 
-* [Yarn](https://yarnpkg.com/)
+* [Node.js](https://nodejs.org/en/)
 
 ```sh
 cp .env.example .env
-yarn install # and yarn
+npm install
 ```
 
 ## Usage
@@ -32,7 +31,7 @@ export const ENV = 'local'
 
 Start the server:
 ```bash
-yarn start
+npm start
 # http://localhost:5000/mrvl-web
 ```
 
