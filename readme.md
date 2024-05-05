@@ -69,11 +69,13 @@ async getFavComics(ids) {
 
 Each Marvel API key ([see environment variables](https://raw.githubusercontent.com/kkamara/mrvl-web/main/.env.example)) has a request limit of 3000/day.
 
-[See reactjs boilerplate.](https://github.com/kkamara/reactjs-boilerplate)
+[See ReactJS boilerplate.](https://github.com/kkamara/reactjs-boilerplate)
 
-[See php scraper.](https://github.com/kkamara/php-scraper)
+[See PHP scraper.](https://github.com/kkamara/php-scraper)
 
-[See nodejs reactjs boilerplate.](https://github.com/kkamara/nodejs-reactjs-boilerplate)
+[See NodeJS ReactJS boilerplate.](https://github.com/kkamara/nodejs-reactjs-boilerplate)
+
+[See PHP ReactJS boilerplate.](https://github.com/kkamara/php-reactjs-boilerplate)
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
