@@ -9,7 +9,8 @@
 ![mrvl3.png](https://raw.githubusercontent.com/kkamara/useful/main/mrvl3.png)
 
 # mrvl-web
-(2022) Browse and manage your favourite Marvel Comics. Reactjs.
+
+(2022) Browse and manage your favourite Marvel Comics. ReactJS 18.
 
 ## Installation
 
