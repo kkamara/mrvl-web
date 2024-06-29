@@ -14,7 +14,7 @@
 
 ## Installation
 
-* [Node.js](https://nodejs.org/en/)
+* [NodeJS 14](https://nodejs.org/en/blog/release/v14.21.3) (arrives with [npmjs](https://www.npmjs.com/))
 
 ```sh
 cp .env.example .env
