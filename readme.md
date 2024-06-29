@@ -33,7 +33,8 @@ export const ENV = 'local'
 Start the server:
 ```bash
 npm start
-# http://localhost:5000/mrvl-web
+# The app works at the following full path including trailing `/`.
+# http://localhost:3000/mrvl-web/
 ```
 
 ## Code snippet
