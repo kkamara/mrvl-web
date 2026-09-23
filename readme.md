@@ -10,7 +10,7 @@
 
 # mrvl-web
 
-(2022) Browse and manage your favourite Marvel Comics. ReactJS 18.
+(28-Mar-2022) Browse and manage your favourite Marvel Comics. ReactJS 18.
 
 ## Installation
 
